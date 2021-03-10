@@ -11,8 +11,8 @@ import { Card, CardMedia, ClickAwayListener, Grid, Grow, Link, Menu, MenuItem, M
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    // border: 'none',
-    // boxShadow: 'none',
+    border: 'none',
+    boxShadow: 'none',
     // padding: '10px 0'
   },
   appBar: {
