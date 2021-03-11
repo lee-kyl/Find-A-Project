@@ -31,7 +31,7 @@ export default function SimpleCard() {
     <Card className={classes.root}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Information Block
+          The Information Block
         </Typography>
         <Typography variant="h5" component="h2">
           Project Name: Social Digital Platform
