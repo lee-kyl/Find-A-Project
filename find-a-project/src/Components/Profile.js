@@ -8,7 +8,7 @@ export default function Profile() {
     <Card>
       <CardContent>
         <Typography>
-            Profile Component
+            Old Fish is Here!
         </Typography>
       </CardContent>
     </Card>
