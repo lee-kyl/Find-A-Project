@@ -8,7 +8,7 @@ export default function Notification() {
     <Card>
       <CardContent>
         <Typography>
-            Notification Component Old fish
+            Notification Component
         </Typography>
       </CardContent>
     </Card>

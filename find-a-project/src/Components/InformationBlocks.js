@@ -5,9 +5,9 @@ export default function InformationBlocks() {
     return (
         <div>
             <p></p>
-            <SimpleCard></SimpleCard>
+            <SimpleCard /> //JSX syntax
             <p></p>
-            <SimpleCard></SimpleCard>
+            <SimpleCard />
         </div>
     )
 }
