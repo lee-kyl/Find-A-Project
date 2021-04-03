@@ -1,14 +1,16 @@
 const express = require('express');
-const router = express.router;
+const router = express.Router();
 const user = require('../model/user');
 
-router.post(
-    '/showUsers/',
-    (req, res) =>{ 
-        user.find({}).then(result => {
-            res.status(200).json(result);
-        }).catch(err => {
+router.get('/showUsers',
+    (req, res) => {
+        user.find()
+        .then(result => {
+            res.send(result);
+        })
+        .catch(err => {
             console.log(err);
-            res.status(400).json(err);
         })
     });
+
+module.exports = router;
