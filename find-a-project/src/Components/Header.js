@@ -128,7 +128,7 @@ export default function Header() {
 </Grid>
 
 <Grid item xs={2}>
-          <Button href="/SIGN IN">
+          <Button href="/signin">
           <Typography variant="h7" >
               SIGN IN
           </Typography>
@@ -136,7 +136,7 @@ export default function Header() {
 </Grid>
 
 <Grid item xs={2}>
-          <Button href="/SIGN UP">
+          <Button href="/signup">
           <Typography variant="h7" >
               SIGN UP
           </Typography>

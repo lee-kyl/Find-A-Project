@@ -18,9 +18,9 @@ const postSchema = new Schema({
                 ref:"User"
             },
             content: String
-        },{timestamps: true}]
-    },{timestamps:true}]
-},{timestamps: true});
+        }]
+    }]
+});
 
 const Post = mongoose.model('Post',postSchema);
 module.exports = Post;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Router } from "react-router-dom";
+import { Router,Switch,BrowserRouter } from "react-router-dom";
 import Header from "./Components/Header";
 import Routes from "./Routes/routes";
 import history from "./Services/history";
@@ -11,7 +11,7 @@ function App() {
     <>
       <Router history={history}>
         <Card variant="outlined">
-            <Header></Header>
+            <Header />
             
             <Divider />
 
