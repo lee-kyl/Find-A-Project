@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     userNumber: {type: String, required:true},
-    userType: {enum:["Student","Staff"], required:true},
+    userType: {type: String, enum: ['Student','Staff'], required:true},
     firstName: {type:String, required:true},
     familyName: {type:String, required:true},
     email: {type:String, required:true},

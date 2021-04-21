@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { Avatar,
          Button, 
          TextField,
@@ -7,6 +7,15 @@ import { Avatar,
          Container,
          Paper} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+const initialState = {
+    firstName:'',
+    lastName:'',
+    email:'',
+    schoolID:'',
+    password:'',
+    confirmPassword:''
+};
 
 const useStyles = makeStyles((theme) => ({
     spacing: {
@@ -27,12 +36,18 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const handleSignUp = () => {
-
-}
-
 export const SignUpForm = () => {
     const classes = useStyles();
+    const [formData, setFormData] = useState(initialState);
+
+
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        
+    }
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value});
+    }
 
     return (
         <Container className={classes.spacing} component="main" maxWidth="xs">
@@ -53,36 +68,37 @@ export const SignUpForm = () => {
                             type="email"
                             variant="outlined"
                             fullWidth 
+                            onChange={handleChange}
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <TextField 
-                            id="firstname"
-                            name="firstname" 
+                            id="firstName"
+                            name="firstName" 
                             label="First Name" 
                             variant="outlined"
                             fullWidth 
+                            onChange={handleChange}
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <TextField 
-                            id="lastname" 
-                            name="lastname"
+                            id="lastName" 
+                            name="lastName"
                             label="Last Name" 
                             variant="outlined"
                             fullWidth 
+                            onChange={handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
-
-                    </Grid>
-                    <Grid item xs={12}>
                         <TextField 
-                            id="school-id" 
-                            name="school-id"
+                            id="schoolID" 
+                            name="schoolID"
                             label="School ID" 
                             variant="outlined"
                             fullWidth 
+                            onChange={handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -93,16 +109,18 @@ export const SignUpForm = () => {
                             type="password"
                             variant="outlined"
                             fullWidth 
+                            onChange={handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField 
-                            id="re-enter-password"
-                            name="re-enter-password" 
+                            id="confirmPassword"
+                            name="confirmPassword" 
                             label="Re-enter Password" 
                             type="password"
                             variant="outlined"
                             fullWidth 
+                            onChange={handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -111,6 +129,7 @@ export const SignUpForm = () => {
                             fullWidth
                             variant="contained"
                             color="primary"
+                            onChange={handleChange}
                         >
                         Sign Up
                         </Button>
