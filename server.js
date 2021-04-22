@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const mongoURI = require('./model/mongoConnection')
 const cors = require('cors');
 const post = require('./routes/post');
-
+const userRoute = require('./routes/user.js');
 const app = express();
 const port = 5000;
 
@@ -14,6 +14,7 @@ app.get('/',(req, res) => {
 });
 
 app.use('/', post);
+app.use('/user',userRoute)
 
 mongoose.connect(mongoURI,{useNewUrlParser: true, useUnifiedTopology: true})
         .then(() => app.listen(process.env.PORT || port, () => {

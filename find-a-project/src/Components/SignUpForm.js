@@ -5,13 +5,20 @@ import { Avatar,
          Grid, 
          Typography, 
          Container,
-         Paper} from '@material-ui/core';
+         Paper,
+         Radio,
+         RadioGroup,
+         FormControlLabel,
+        } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { signup } from '../Redux/actions/auth';
+
 
 const initialState = {
     firstName:'',
     lastName:'',
     email:'',
+    userType:'student',
     schoolID:'',
     password:'',
     confirmPassword:''
@@ -33,22 +40,30 @@ const useStyles = makeStyles((theme) => ({
     },
     avatarPadding: {
         padding: theme.spacing(2)
+    },
+    radioGroup: {
+        justifyContent: 'center'
     }
 }))
 
 export const SignUpForm = () => {
     const classes = useStyles();
     const [formData, setFormData] = useState(initialState);
-
+    const [value, setValue] = useState('student');
 
     const handleSignUp = (e) => {
         e.preventDefault();
-        
+       // dispatch();
     }
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value});
+        setFormData({...formData, [e.target.name]: e.target.value});  
     }
 
+    const handleRadioChange = (e) => {
+        setValue(e.target.value);
+        setFormData({...formData, [e.target.name]: e.target.value});
+    }
+  
     return (
         <Container className={classes.spacing} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={1}>
@@ -92,6 +107,12 @@ export const SignUpForm = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
+                        <RadioGroup row className={classes.radioGroup} name="userType" value={value} onChange={handleRadioChange}>
+                            <FormControlLabel value="student" control={<Radio />} label="Student" />
+                            <FormControlLabel value="staff" control={<Radio />} label="Staff" />
+                        </RadioGroup>
+                    </Grid>
+                    <Grid item xs={12}>
                         <TextField 
                             id="schoolID" 
                             name="schoolID"
@@ -129,7 +150,6 @@ export const SignUpForm = () => {
                             fullWidth
                             variant="contained"
                             color="primary"
-                            onChange={handleChange}
                         >
                         Sign Up
                         </Button>

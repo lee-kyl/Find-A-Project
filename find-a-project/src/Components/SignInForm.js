@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
         Avatar,
         Grid,
@@ -9,6 +9,13 @@ import {
         Paper
         } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+
+
+const initialState = {
+    email: '',
+    password: ''
+}
 
 const useStyles = makeStyles((theme) => ({
     spacing: {
@@ -29,13 +36,20 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const handleSignIn = () => {
-
-}
 
 export const SignInForm = () => {
-    
     const classes = useStyles();
+
+    const [formData, setFormData] = useState(initialState);
+
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value});
+    }
+
+    const handleSignIn = (e) => {
+        e.preventDefault();
+        console.log(formData);
+    }    
 
     return (
         <Container className={classes.spacing} component="main" maxWidth="xs">
@@ -56,6 +70,7 @@ export const SignInForm = () => {
                             type="email"
                             variant="outlined"
                             fullWidth
+                            onChange = {handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -65,6 +80,7 @@ export const SignInForm = () => {
                             label="Password"
                             variant="outlined"
                             fullWidth
+                            onChange = {handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
