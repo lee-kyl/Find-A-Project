@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    userNumber: {type: String, required:true},
-    userType: {type: String, enum: ['Student','Staff'], required:true},
+    schoolID: {type: String, required:true},
+    userType: {type: String, enum: ['student','staff'], required:true},
     firstName: {type:String, required:true},
-    familyName: {type:String, required:true},
+    lastName: {type:String, required:true},
     email: {type:String, required:true},
+    password: {type: String, required:true},
     potrait: {type:Buffer}
 },{timestamps: true});
 

@@ -12,8 +12,8 @@ import { Avatar,
         } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { signup } from '../Redux/actions/auth';
-
-
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 const initialState = {
     firstName:'',
     lastName:'',
@@ -50,10 +50,11 @@ export const SignUpForm = () => {
     const classes = useStyles();
     const [formData, setFormData] = useState(initialState);
     const [value, setValue] = useState('student');
-
+    const history = useHistory();
+    const dispatch = useDispatch();
     const handleSignUp = (e) => {
         e.preventDefault();
-       // dispatch();
+        dispatch(signup(formData, history));
     }
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});  

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
         Avatar,
         Grid,
@@ -9,6 +10,8 @@ import {
         Paper
         } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { signin } from '../Redux/actions/auth.js';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -39,16 +42,16 @@ const useStyles = makeStyles((theme) => ({
 
 export const SignInForm = () => {
     const classes = useStyles();
-
+    const history = useHistory();
     const [formData, setFormData] = useState(initialState);
-
+    const dispatch = useDispatch();
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
 
     const handleSignIn = (e) => {
         e.preventDefault();
-        console.log(formData);
+        dispatch(signin(formData,history));
     }    
 
     return (
@@ -78,6 +81,7 @@ export const SignInForm = () => {
                             id="password"
                             name="password"
                             label="Password"
+                            type="password"
                             variant="outlined"
                             fullWidth
                             onChange = {handleChange}
