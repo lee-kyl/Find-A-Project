@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.schema
+const Schema = mongoose.schema;
 const postSchema = new Schema({
     author: {
-        type: Schema.ObjectID,
+        type: Schema.ObjectId,
         ref:"User"
     },
     content: String,
     comment:[{
         user: {
-            type: Schema.ObjectID,
+            type: Schema.ObjectId,
             ref:"User"
         },
         content:String,
         reply: [{
             user: {
-                type: Schema.ObjectID,
+                type: Schema.ObjectId,
                 ref:"User"
             },
             content: String
