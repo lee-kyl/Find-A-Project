@@ -146,15 +146,15 @@ export default function Header() {
           </Button>        
 </Grid>
 
-<Grid item xs={1}>
-  {
-    user.firstName ? <Avatar>{user.lastName[0].toUpperCase()}</Avatar> : ''
-  }
-</Grid>
+{
+  user.firstName ? <Grid item xs={1}><Avatar>{user.firstName[0].toUpperCase()}</Avatar></Grid> : ''
+}
+
 <Grid item xs={2}>
           <Button href="/signin">
 
           <Typography variant="subtitle1" >
+              
               {
                 user.firstName ? `${user.firstName} ${user.lastName}` : 'SIGN IN'
               }
