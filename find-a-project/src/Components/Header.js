@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -6,7 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Card, CardMedia, ClickAwayListener, Grid, Grow, Link, Menu, MenuItem, MenuList, Paper, Popper } from '@material-ui/core';
+import { Avatar, Card, CardMedia, ClickAwayListener, Grid, Grow, Link, Menu, MenuItem, MenuList, Paper, Popper } from '@material-ui/core';
+import { useLocation, useHistory } from 'react-router-dom';
+import { logout } from '../Redux/actions/auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,9 +49,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
+  const location = useLocation();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   // Reference: https://material-ui.com/components/menus/
-  const [anchorEl, setAnchorEl] = React.useState(null); 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [user, setUser] = React.useState('Default User');
+  useEffect(() => {
+    if (localStorage.getItem('profile')) {
+      const response = JSON.parse(localStorage.getItem('profile'));
+      setUser(response?.result);
+    }
+  }, [location]);
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -58,6 +71,12 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  const logoutButtonClicked = () => {
+    if (user.firstName) {
+      dispatch(logout(history));
+    }
+  }
+
   const open = Boolean(anchorEl);
 
   return (
@@ -65,9 +84,9 @@ export default function Header() {
     <div id="home"></div>
     <AppBar position="static" color='transparent' className={classes.root}>
       <Toolbar>
-        <Grid container justify="space-end" alignItems="center">
+        <Grid container justify="flex-start" alignItems="center">
           <Grid item xs={4}>
-            <Typography variant="h7">
+            <Typography variant="subtitle1">
                   FIND A PROJECT
             </Typography>
           </Grid>
@@ -80,7 +99,7 @@ export default function Header() {
           <Grid container justify="space-around" alignItems="center">
             <Grid item xs={2}>
               <Button href="/">
-              <Typography variant="h7">
+              <Typography variant="subtitle1">
                   HOME
               </Typography>
               </Button>
@@ -121,24 +140,36 @@ export default function Header() {
 
 <Grid item xs={2}>
           <Button href="/About">
-            <Typography variant="h7" >
+            <Typography variant="subtitle1" >
               MAILBOX
             </Typography>
           </Button>        
 </Grid>
 
+<Grid item xs={1}>
+  {
+    user.firstName ? <Avatar>{user.lastName[0].toUpperCase()}</Avatar> : ''
+  }
+</Grid>
 <Grid item xs={2}>
           <Button href="/signin">
-          <Typography variant="h7" >
-              SIGN IN
+
+          <Typography variant="subtitle1" >
+              {
+                user.firstName ? `${user.firstName} ${user.lastName}` : 'SIGN IN'
+              }
+
           </Typography>
+
           </Button>        
 </Grid>
 
 <Grid item xs={2}>
-          <Button href="/signup">
-          <Typography variant="h7" >
-              SIGN UP
+          <Button href="/signup" onClick = {logoutButtonClicked}>
+          <Typography variant="subtitle1" >
+              {
+                user.firstName ? 'LOGOUT' : 'SIGN UP'
+              }
           </Typography>
           </Button>
 </Grid>

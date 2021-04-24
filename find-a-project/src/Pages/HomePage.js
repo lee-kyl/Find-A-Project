@@ -8,7 +8,7 @@ import Notification from '../Components/Notification'
 export default function HomePage() {
     return (
         <>
-        <Grid container flexDirection="column" justify="space-around" style={{marginTop: 20}}>
+        <Grid container flexdirection="column" justify="space-around" style={{marginTop: 20}}>
             <Grid item xs={3}>
                 <Profile></Profile>
             </Grid>
