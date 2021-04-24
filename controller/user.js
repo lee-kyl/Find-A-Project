@@ -53,8 +53,8 @@ const signup = async (req, res) => {
             userType,
             schoolID
         });
-
-        const token = jwt.sign({ email: registeredUser.email, id: registeredUser._id, name: registeredUser.lastname}, 'demo', { expiresIn: "24h"});
+        //const token = {};
+        const token = jwt.sign({ email: result.email, id: result._id, name: result.lastname}, 'demo', { expiresIn: "24h"});
         res.status(200).json({ result, token });
     } catch (error) {
         res.status(500).json({ 

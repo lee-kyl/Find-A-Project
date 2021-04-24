@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const mongoURI = require('./model/mongoConnection')
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const userRoute = require('./routes/user.js');
 const app = express();
 const port = 5000;
