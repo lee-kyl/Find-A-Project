@@ -4,13 +4,12 @@ const Schema = mongoose.Schema;
 const teamSchema = new Schema({
     teamName: String,
     members:[{
-       type: Schema.ObjectId,
+       type: Schema.Types.ObjectId,
        required: true,
        ref: "User"
     }],
     supervisor:{
-        type: Schema.ObjectId,
-        required: true,
+        type: Schema.Types.ObjectId,
         ref: "User"
     }
 },{timestamps:true});
