@@ -112,8 +112,9 @@ export default function Header() {
                 aria-controls='menu-list-grow'
                 aria-haspopup="true"
                 onMouseEnter={handlePopoverOpen}
+                href="/Profile"
               >
-                PERSONAL
+                PERSONALn
               </Button>
               <Popper placement="bottom-start" open={open} anchorEl={anchorEl} role={undefined} onMouseLeave={handlePopoverClose} onClose={handlePopoverClose} transition>
                 {({ TransitionProps, placement }) => (
