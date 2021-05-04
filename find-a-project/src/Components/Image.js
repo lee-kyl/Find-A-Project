@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
 export default function ImageAvatars() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <div>
     <Typography variant="h5" component="h2">
-        Profile
+      Profile
     </Typography>
     <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> 
     </div>

@@ -5,6 +5,7 @@ import { Typography } from '@material-ui/core';
 import Image from  '../Components/Image';
 import ProfileInformation from '../Components/ProfileInformation';
 import { makeStyles } from '@material-ui/core/styles';
+import ProfileSettings from '../Components/ProfileSettings'
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
@@ -31,6 +32,7 @@ export default function ProfilePage() {
     return (
     <Card>
       <CardContent>
+      <ProfileSettings style="float:right"></ProfileSettings>
         <Typography>
             <Image></Image>
             <ProfileInformation> </ProfileInformation>
