@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const post = require('../model/post.js');
 const auth = require('../middleware/auth');
+const { getPosts, getPost, createPost, modifyPost, deletePost } = require('../controller/post.js');
 
-//todo: add auth middleware before the actual post controller.s
 
+router.get('/getPosts', getPosts);
+router.post('/getPost', auth, getPost); 
+router.post('/createPost', auth, createPost);
+router.post('/modifyPost', auth, modifyPost);
+router.post('/deletePost', auth, deletePost);
 
 module.exports = router;

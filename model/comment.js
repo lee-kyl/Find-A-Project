@@ -2,17 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
-    post:{
+    post: {
         type:Schema.Types.ObjectId,
-        ref:"Post",
-        required: true
+        ref:"Post"
     },
     author:{
-        type:Schema.Types.ObjectId,
-        ref:"User",
-        required: true
-    },
-    replier:{
         type:Schema.Types.ObjectId,
         ref:"User",
         required: true
@@ -20,7 +14,8 @@ const commentSchema = new Schema({
     content:{
         type: String,
         required: true
-    }
+    },
+    reply: [ this ]
 });
 
 const Comment = commentSchema.model('Comment',commentSchema);
