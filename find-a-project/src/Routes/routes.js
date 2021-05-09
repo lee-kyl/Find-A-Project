@@ -5,6 +5,7 @@ import { SignUpForm } from "../Components/SignUpForm";
 import HomePage from "../Pages/HomePage";
 import { SignInForm } from "../Components/SignInForm";
 import Profile from "../Pages/Profile";
+import PostPage from "../Pages/PostPage";
 
 export default function Routes() {
   return (
@@ -15,7 +16,8 @@ export default function Routes() {
       {/* <Route path="/item1" component={Item1}></Route> */}
       <Route path="/signup" exact component={SignUpForm} />
       <Route path="/signin" exact component={SignInForm} />
-      <Route path="/Profile" exact component={Profile} />     
+      <Route path="/Profile" exact component={Profile} />
+      <Route path="/post/:id" exact component={PostPage} />
     </Switch>
   );
 }
