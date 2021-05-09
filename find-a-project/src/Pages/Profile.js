@@ -15,10 +15,10 @@ export default function HomePage() {
         justify="space-around"
         style={{ marginTop: 20 }}
       >
-        <Grid item xs={3}></Grid>
-        <Grid item xs={5}>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={9}>
           <Grid container flexdirection="column" justify="space-around">
-            <Grid item xs={6}>
+            <Grid item xs={8}>
               <ProfilePage></ProfilePage>
               <p></p>
               <ProfileSkills></ProfileSkills>
@@ -35,7 +35,7 @@ export default function HomePage() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={3}></Grid>
+        <Grid item xs={1}></Grid>
       </Grid>
     </>
   );
