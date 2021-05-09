@@ -1,8 +1,8 @@
 import { LinearProgress } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
-import Post from './Post'
+import PostCard from './PostCard'
 
-export default function PostList() {
+export default function PostCardList() {
     const fetchData = async (url) => {
         // const response = await fetch(url);
         // let data = await response.json();
@@ -36,9 +36,9 @@ export default function PostList() {
     const renderPost = () => {
         const posts = postList?.map(post => {
             switch(post.type) {
-                case 'project': return <Post></Post>;
+                case 'project': return <PostCard></PostCard>;
                 default:
-                    return <Post></Post>;
+                    return <PostCard></PostCard>;
             }
         });
 

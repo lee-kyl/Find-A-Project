@@ -71,7 +71,7 @@ const createPost = async (req, res) => {
             break;          
         default:
             break;
-    }  
+    }
 }
 
 const getPost = async (req, res) => {

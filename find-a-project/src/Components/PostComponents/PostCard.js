@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Post() {
+export default function PostCard() {
   const classes = useStyles();
 
   return (
