@@ -1,3 +1,4 @@
+import { LinearProgress } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import Post from './Post'
 
@@ -7,7 +8,6 @@ export default function PostList() {
         // let data = await response.json();
         // return data;
         // TODO: replace mock function
-        
         return mockAPICall();
     }
 
@@ -31,11 +31,15 @@ export default function PostList() {
         });
     }
 
-    const renderLoadingSpinner = () => <p>is loading ...</p>
+    const renderLoadingSpinner = () => <LinearProgress style={{marginTop: 50}}/>
 
     const renderPost = () => {
         const posts = postList?.map(post => {
-            return <Post></Post>
+            switch(post.type) {
+                case 'project': return <Post></Post>;
+                default:
+                    return <Post></Post>;
+            }
         });
 
         return <>{posts}</>

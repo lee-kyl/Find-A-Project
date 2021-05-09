@@ -44,7 +44,7 @@ export default function Post() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small" href="/post/1">Learn More</Button>
       </CardActions>
     </Card>
   );
