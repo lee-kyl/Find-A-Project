@@ -14,64 +14,72 @@ const getPosts = async (req, res) => {
 }
 
 const createPost = async (req, res) => {
-    const { type } = req.body;
-    const { id } = req.params;
-    const user = new User();
-    try {
-        user = User.findById(id);
-    } catch (error) {
-        res.status(404).json({ message: error.message });
-    }
-    switch (type) {
-        case "Discussion":
-            const { tag } = req.body;
-            const newDiscussion = new Discussion({ tag });
-            try {
-                newDiscussion.save((err) => {
-                    if (err) return handleError(err);
-                    const { title,content,type } = req.body;
-                    const newPost = new Post({ author:user._id, title, content, type, addition: newDiscussion._id});
-                    newPost.save();
-                });
-                res.status(201).json(newPost); 
-            } catch (error) {
-                res.status(409).json({ message:error.message });
-            }
+    const { type, userId, title,content } = req.body;
+    let user = new User();
+    user = await User.findById(userId);
+
+    res.status(200).json(user);
+
+    const { tag } = req.body;
+    const newDiscussion = new Discussion({ tag });
+
+    const saveDiscussion = await newDiscussion.save();
+    // const user = new User();
+    // try {
+    //     user = User.findById(id);
+    // } catch (error) {
+    //     res.status(404).json({ message: error.message });
+    // }
+    // switch (type) {
+    //     case "Discussion":
+    //         const { tag } = req.body;
+    //         const newDiscussion = new Discussion({ tag });
+    //         try {
+    //             newDiscussion.save((err) => {
+    //                 if (err) return handleError(err);
+    //                 const { title,content,type } = req.body;
+    //                 const newPost = new Post({ author:user._id, title, content, type, addition: newDiscussion._id});
+    //                 newPost.save();
+    //             });
+    //             res.status(201).json(newPost); 
+    //         } catch (error) {
+    //             res.status(409).json({ message:error.message });
+    //         }
             
-            break;
-        case "Project":
-            const { school,major,slot } = req.body;
-            const newProject = new Project({ school,major,availability:true,slot });
-            try {
-                newProject.save((err) => {
-                    if (err) return handleError(err);
-                    const { title,content,type } = req.body;
-                    const newPost = new Post({ author:user._id, title, content, type, addition: newProject._id});
-                    newPost.save();
-                });
-                res.status(201).json(newPost); 
-            } catch (error) {
-                res.status(409).json({ message:error.message });
-            }
-            break;
-        case "TeamUp":
-            const { team } = req.body;
-            const newTeamUp = new TeamUp({ team, availability:true });
-            try {
-                newTeamUp.save((err) => {
-                    if (err) return handleError(err);
-                    const { title,content,type } = req.body;
-                    const newPost = new Post({ author: user._id, title, content, type, addition: newTeamUp._id});
-                    newPost.save();
-                });
-                res.status(201).json(newPost); 
-            } catch (error) {
-                res.status(409).json({ message:error.message });
-            }
-            break;          
-        default:
-            break;
-    }
+    //         break;
+    //     case "Project":
+    //         const { school,major,slot } = req.body;
+    //         const newProject = new Project({ school,major,availability:true,slot });
+    //         try {
+    //             newProject.save((err) => {
+    //                 if (err) return handleError(err);
+    //                 const { title,content,type } = req.body;
+    //                 const newPost = new Post({ author:user._id, title, content, type, addition: newProject._id});
+    //                 newPost.save();
+    //             });
+    //             res.status(201).json(newPost); 
+    //         } catch (error) {
+    //             res.status(409).json({ message:error.message });
+    //         }
+    //         break;
+    //     case "TeamUp":
+    //         const { team } = req.body;
+    //         const newTeamUp = new TeamUp({ team, availability:true });
+    //         try {
+    //             newTeamUp.save((err) => {
+    //                 if (err) return handleError(err);
+    //                 const { title,content,type } = req.body;
+    //                 const newPost = new Post({ author: user._id, title, content, type, addition: newTeamUp._id});
+    //                 newPost.save();
+    //             });
+    //             res.status(201).json(newPost); 
+    //         } catch (error) {
+    //             res.status(409).json({ message:error.message });
+    //         }
+    //         break;          
+    //     default:
+    //         break;
+    // }
 }
 
 const getPost = async (req, res) => {
