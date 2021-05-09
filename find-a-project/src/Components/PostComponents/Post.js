@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard() {
+export default function Post() {
   const classes = useStyles();
 
   return (
