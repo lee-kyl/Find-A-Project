@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const applicationSchema = new Schema({
     project:{
         type: Schema.Types.ObjectId,
-        ref:"Project"
+        ref:"Post"
     },
     isapproved:{
         type: Boolean,

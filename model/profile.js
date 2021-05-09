@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const profileSchema = new Schema({
-    user:{
-        type:Schema.Types.ObjectId,
-        ref:"User"
-    },
     school:{
         type:String,
         required:true
@@ -27,5 +23,6 @@ const profileSchema = new Schema({
     }
 });
 
-const Profile = profileSchema('Profile',profileSchema);
+const Profile = mongoose.model('Profile',profileSchema);
+
 module.exports = Profile;

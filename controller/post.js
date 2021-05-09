@@ -76,23 +76,24 @@ const createPost = async (req, res) => {
 
 const getPost = async (req, res) => {
     const { id } = req.params;
+    console.log(id);
     try {
         const post = await Post.findById(id);
         const { type } = post;
-        
+
         if(type){
-            const fullPost = {};
+            let fullPost = {};
             switch (type) {
                 case "Discussion":
-                    fullPost = post.populate('Discussion').execPopulate();
+                    fullPost = await post.populate("addition").execPopulate();
                     res.status(200).json(fullPost);
                     break;
                 case "Project":
-                    fullPost = post.populate('Project').execPopulate();
+                    fullPost = await post.populate("addition").execPopulate();
                     res.status(200).json(fullPost);
                     break;
                 case "TeamUp":
-                    fullPost = post.populate('TeamUp').execPopulate();
+                    fullPost = await post.populate("addition").execPopulate();
                     res.status(200).json(fullPost);
                     break;
                 default:
@@ -111,13 +112,13 @@ const modifyPost = async (req, res) => {
     try {
         switch (type) {
             case "Discussion":
-                Post.findByIdAndUpdate(id, { content },{ new:true });
+                await Post.findByIdAndUpdate(id, { content },{ new:true }).populate("addition");
                 break;
             case "Project":
-                Post.findByIdAndUpdate(id, { content, availability, slot },{ new:true});
+                await Post.findByIdAndUpdate(id, { content, availability, slot },{ new:true}).populate("addition");
                 break;
             case "TeamUp":
-                Post.findByIdAndUpdate(id, { availability },{ new:true });
+                await Post.findByIdAndUpdate(id, { availability },{ new:true }).populate("addition");
             default:
                 break;
         }
@@ -131,7 +132,7 @@ const modifyPost = async (req, res) => {
 const deletePost = async (req, res) => {
     const { id } = req.params;
     try {
-        Post.findByIdAndDelete(id);
+        await Post.findByIdAndDelete(id);
         res.status(200).json({ message: res.message });
     } catch (error) {
         res.status(404).json({ message: error.message });
