@@ -1,13 +1,10 @@
 import React from 'react'
-import SimpleCard from './InformationBlock'
+import PostList from './PostComponents/PostList'
 
 export default function InformationBlocks() {
     return (
-        <div>
-            <p></p>
-            <SimpleCard />
-            <p></p>
-            <SimpleCard />
-        </div>
+        <>
+            <PostList></PostList>
+        </>
     )
 }

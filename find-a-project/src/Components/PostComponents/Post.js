@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard() {
+export default function Post() {
   const classes = useStyles();
 
   return (
@@ -44,7 +44,7 @@ export default function SimpleCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small" href="/post/1">Learn More</Button>
       </CardActions>
     </Card>
   );
