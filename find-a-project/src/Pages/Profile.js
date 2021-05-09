@@ -1,32 +1,42 @@
-import { Grid } from '@material-ui/core';
-import React from 'react';
+import { Grid } from "@material-ui/core";
+import React from "react";
 import ProfilePage from "../Components/ProfilePage";
 import ProfileSkills from "../Components/ProfileSkill";
 import ProfileApplication from "../Components/ProfileApplication";
 import ProfileRecentActivity from "../Components/ProfileRecentActivity";
-import ProfileTeam from "../Components/ProfileTeam"
-import ProfilePlan from "../Components/ProfilePlan"
+import ProfileTeam from "../Components/ProfileTeam";
+import ProfilePlan from "../Components/ProfilePlan";
 export default function HomePage() {
-    return (
-        <>
-       
-        <Grid container flexdirection="column" justify="space-around" style={{marginTop: 20}}>
-            <Grid item xs={5}>
-                <ProfilePage></ProfilePage>
-                <p></p>
-                <ProfileSkills></ProfileSkills>
-                <p></p>
-                <ProfileApplication></ProfileApplication>
-                <p></p>
-                <ProfileRecentActivity></ProfileRecentActivity>
+  return (
+    <>
+      <Grid
+        container
+        flexdirection="column"
+        justify="space-around"
+        style={{ marginTop: 20 }}
+      >
+        <Grid item xs={1}></Grid>
+        <Grid item xs={9}>
+          <Grid container flexdirection="column" justify="space-around">
+            <Grid item xs={8}>
+              <ProfilePage></ProfilePage>
+              <p></p>
+              <ProfileSkills></ProfileSkills>
+              <p></p>
+              <ProfileApplication></ProfileApplication>
+              <p></p>
+              <ProfileRecentActivity></ProfileRecentActivity>
             </Grid>
-            <Grid item xs={6} style={{marginLeft: 10, marginRight: 10}}>
-                <ProfileTeam></ProfileTeam>
-                <p></p>
-                <ProfilePlan></ProfilePlan>
+
+            <Grid item xs={4}>
+              <ProfileTeam></ProfileTeam>
+              <p></p>
+              <ProfilePlan></ProfilePlan>
             </Grid>
+          </Grid>
         </Grid>
-        
-        </>
-    )
+        <Grid item xs={1}></Grid>
+      </Grid>
+    </>
+  );
 }
