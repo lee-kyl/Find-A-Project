@@ -19,7 +19,7 @@ const postSchema = new Schema({
         enum:["Discussion","Project","TeamUp"],
         required: true
     },
-    addtition: {
+    addition: {
         type: Schema.Types.ObjectId,
         required: true,
         refPath: 'type'

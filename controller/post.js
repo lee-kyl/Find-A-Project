@@ -3,6 +3,7 @@ const Discussion = require('../model/discussion.js');
 const Project = require('../model/project.js');
 const TeamUp = require('../model/teamup.js');
 const User = require('../model/user.js');
+const mongoose = require('mongoose');
 
 const getPosts = async (req, res) => {
     try {
@@ -14,64 +15,63 @@ const getPosts = async (req, res) => {
 }
 
 const createPost = async (req, res) => {
-    const { type } = req.body;
-    const { id } = req.params;
-    const user = new User();
+    const { type, userId } = req.body;
+    let user = {};
     try {
-        user = User.findById(id);
+       user = await User.findById(userId);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+       res.status(404).json({ message: error.message });
     }
     switch (type) {
         case "Discussion":
             const { tag } = req.body;
-            const newDiscussion = new Discussion({ tag });
+            const newDiscussion = new Discussion({ _id:new mongoose.Types.ObjectId(), tag });
             try {
-                newDiscussion.save((err) => {
+                newDiscussion.save(async (err) => {
                     if (err) return handleError(err);
                     const { title,content,type } = req.body;
                     const newPost = new Post({ author:user._id, title, content, type, addition: newDiscussion._id});
-                    newPost.save();
-                });
-                res.status(201).json(newPost); 
+                    await newPost.save();
+                    res.status(201).json(newPost); 
+                });    
             } catch (error) {
                 res.status(409).json({ message:error.message });
             }
-            
             break;
         case "Project":
             const { school,major,slot } = req.body;
-            const newProject = new Project({ school,major,availability:true,slot });
+            const newProject = new Project({ _id:new mongoose.Types.ObjectId(),school,major,availability:true,slot });
             try {
-                newProject.save((err) => {
+                newProject.save(async (err) => {
                     if (err) return handleError(err);
                     const { title,content,type } = req.body;
                     const newPost = new Post({ author:user._id, title, content, type, addition: newProject._id});
-                    newPost.save();
+                    await newPost.save();
+                    res.status(201).json(newPost); 
                 });
-                res.status(201).json(newPost); 
+                
             } catch (error) {
                 res.status(409).json({ message:error.message });
             }
             break;
         case "TeamUp":
             const { team } = req.body;
-            const newTeamUp = new TeamUp({ team, availability:true });
+            const newTeamUp = new TeamUp({ _id:new mongoose.Types.ObjectId(),team, availability:true });
             try {
-                newTeamUp.save((err) => {
+                newTeamUp.save(async (err) => {
                     if (err) return handleError(err);
                     const { title,content,type } = req.body;
                     const newPost = new Post({ author: user._id, title, content, type, addition: newTeamUp._id});
-                    newPost.save();
-                });
-                res.status(201).json(newPost); 
+                    await newPost.save();
+                    res.status(201).json(newPost); 
+                });               
             } catch (error) {
                 res.status(409).json({ message:error.message });
             }
             break;          
         default:
             break;
-    }
+    }  
 }
 
 const getPost = async (req, res) => {
