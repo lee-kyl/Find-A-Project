@@ -5,6 +5,7 @@ import Routes from "./Routes/routes";
 import history from "./Services/history";
 import Card from "@material-ui/core/Card";
 import { Divider } from "@material-ui/core";
+import './App.css';
 
 function App() {
   return (
