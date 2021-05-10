@@ -10,13 +10,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Avatar, Card, CardMedia, ClickAwayListener, Grid, Grow, Link, Menu, MenuItem, MenuList, Paper, Popper } from '@material-ui/core';
 import { useLocation, useHistory } from 'react-router-dom';
 import { logout } from '../Redux/actions/auth';
+import SearchBar from './SearchBar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     border: 'none',
-    boxShadow: 'none',
-    // padding: '10px 0'
+    boxShadow: 'none'
   },
   appBar: {
     flex: 1,
@@ -81,7 +81,6 @@ export default function Header() {
 
   return (
     <>
-    <div id="home"></div>
     <AppBar position="static" color='transparent' className={classes.root}>
       <Toolbar>
         <Grid container justify="flex-start" alignItems="center">
@@ -114,7 +113,7 @@ export default function Header() {
                 onMouseEnter={handlePopoverOpen}
                 href="/Profile"
               >
-                PERSONALn
+                PERSONAL
               </Button>
               <Popper placement="bottom-start" open={open} anchorEl={anchorEl} role={undefined} onMouseLeave={handlePopoverClose} onClose={handlePopoverClose} transition>
                 {({ TransitionProps, placement }) => (
