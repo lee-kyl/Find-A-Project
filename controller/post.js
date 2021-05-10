@@ -87,28 +87,10 @@ const getPost = async (req, res) => {
     console.log(id);
     try {
         const post = await Post.findById(id);
-        const { type } = post;
-
-        if(type){
-            let fullPost = {};
-            switch (type) {
-                case "Discussion":
-                    fullPost = await post.populate("addition").execPopulate();
-                    res.status(200).json(fullPost);
-                    break;
-                case "Project":
-                    fullPost = await post.populate("addition").execPopulate();
-                    res.status(200).json(fullPost);
-                    break;
-                case "TeamUp":
-                    fullPost = await post.populate("addition").execPopulate();
-                    res.status(200).json(fullPost);
-                    break;
-                default:
-                    break;
-            }
-        }
-        
+        let fullPost = {};
+        fullPost = await post.populate("addition").execPopulate();
+        fullPost = await post.populate("author").execPopulate();
+        res.status(200).json(fullPost);
     } catch (error) {
         res.status(404).json({ message:error.message });
     }
