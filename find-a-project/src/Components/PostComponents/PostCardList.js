@@ -1,14 +1,14 @@
 import { LinearProgress } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
-import PostCard from './PostCard'
+import DiscussionCard from './DiscussionCard';
+import ProjectCard from './ProjectCard'
+import TeamUpCard from './TeamUpCard';
 
 export default function PostCardList() {
     const fetchData = async (url) => {
-        // const response = await fetch(url);
-        // let data = await response.json();
-        // return data;
-        // TODO: replace mock function
-        return mockAPICall();
+        const response = await fetch(url);
+        let data = await response.json();
+        return data;
     }
 
     const [postList, setPostList] = useState([]);
@@ -18,12 +18,9 @@ export default function PostCardList() {
         getData();
     })
 
-    // Mock API call
-    const mockAPICall = () => new Promise(resolve => setTimeout(resolve, 2000));
-
     const getData = () => {
-        return fetchData('').then((result) => {
-            setPostList([{id: 1}, {id: 2}])
+        return fetchData('http://localhost:5000/post/getPosts').then((result) => {
+            setPostList(result)
             setIsLoading(false)
         }).catch((err) => {
             setPostList([])
@@ -36,9 +33,11 @@ export default function PostCardList() {
     const renderPost = () => {
         const posts = postList?.map(post => {
             switch(post.type) {
-                case 'project': return <PostCard></PostCard>;
+                case 'Project': return <ProjectCard post={post}></ProjectCard>;
+                case 'Discussion': return <DiscussionCard post={post}></DiscussionCard>;
+                case 'TeamUp': return <TeamUpCard post={post}></TeamUpCard>;
                 default:
-                    return <PostCard></PostCard>;
+                    return <></>;
             }
         });
 

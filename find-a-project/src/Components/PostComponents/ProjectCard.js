@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PostCard() {
+export default function ProjectCard() {
   const classes = useStyles();
 
   return (
