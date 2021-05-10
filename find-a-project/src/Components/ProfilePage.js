@@ -32,7 +32,7 @@ export default function ProfilePage() {
     return (
     <Card>
       <CardContent>
-      <ProfileSettings style="float:right"></ProfileSettings>
+      <ProfileSettings ></ProfileSettings>
         <Typography>
             <Image></Image>
             <ProfileInformation> </ProfileInformation>

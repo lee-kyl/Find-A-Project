@@ -18,7 +18,7 @@ export default function HomePage() {
         <Grid item xs={1}></Grid>
         <Grid item xs={9}>
           <Grid container flexdirection="column" justify="space-around">
-            <Grid item xs={8}>
+            <Grid item xs={6}>
               <ProfilePage></ProfilePage>
               <p></p>
               <ProfileSkills></ProfileSkills>
