@@ -8,7 +8,15 @@ const mongoose = require('mongoose');
 const getPosts = async (req, res) => {
     try {
         const posts = await Post.find();
-        res.status(200).json(posts);
+        const fullPosts = [];
+        for (let i = 0; i < posts.length; i++) {
+            let fullPost = {};
+            fullPost = await posts[i].populate("addition").execPopulate();
+            fullPost = await posts[i].populate("author").execPopulate();
+            fullPosts.push(fullPost);
+        }
+        
+        res.status(200).json(fullPosts);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
