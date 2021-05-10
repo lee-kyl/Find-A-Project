@@ -5,11 +5,16 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Avatar, CardHeader, Chip, Grid } from '@material-ui/core';
+import GroupAddOutlinedIcon from '@material-ui/icons/GroupAddOutlined';
+import QuestionAnswerOutlinedIcon from '@material-ui/icons/QuestionAnswerOutlined';
+import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    maxHeight: 300
+    maxHeight: 300,
+    marginBottom: 20,
   },
   bullet: {
     display: 'inline-block',
@@ -21,30 +26,49 @@ const useStyles = makeStyles({
   },
   pos: {
     marginBottom: 12,
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis'
   },
 });
 
-export default function PostCard() {
+const colorMap = {
+  'Discussion' : {backgroundColor: '#256EFF'},
+  'TeamUp' : {backgroundColor: '#A481DA'},
+  'Project' : {backgroundColor: '#3DDC97'}
+}
+
+const iconMap = {
+  'Discussion' : <QuestionAnswerOutlinedIcon></QuestionAnswerOutlinedIcon>,
+  'TeamUp' : <GroupAddOutlinedIcon></GroupAddOutlinedIcon>,
+  'Project' : <AssignmentOutlinedIcon></AssignmentOutlinedIcon>
+}
+
+export default function PostCard(props) {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
+    <CardHeader
+        avatar={<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />}
+        title={props.post?.title}
+        style={{...colorMap[props.post?.type], color: 'white', font: 'bold'}}
+        action={iconMap[props.post?.type]}
+    />
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          The Information Block
-        </Typography>
-        <Typography variant="h5" component="h2">
-          Project Name: Social Digital Platform
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          Area: Information Technology
-        </Typography>
-        <Typography variant="body2" component="p">
-
+        <Typography variant="body2" color="textSecondary" component="p" className={classes.pos}>
+            {props.post?.content}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" href="/post/1">Learn More</Button>
+        <Grid container justify="space-between">
+        <Grid item xs={3}>
+          <Button size="small" href={`/post/${props.post?._id}`}>Learn More</Button>
+        </Grid>
+        <Grid item xs={8}>
+          {props.children}
+        </Grid>
+        </Grid>
       </CardActions>
     </Card>
   );

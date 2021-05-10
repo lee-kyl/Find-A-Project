@@ -8,7 +8,15 @@ const mongoose = require('mongoose');
 const getPosts = async (req, res) => {
     try {
         const posts = await Post.find();
-        res.status(200).json(posts);
+        const fullPosts = [];
+        for (let i = 0; i < posts.length; i++) {
+            let fullPost = {};
+            fullPost = await posts[i].populate("addition").execPopulate();
+            fullPost = await posts[i].populate("author").execPopulate();
+            fullPosts.push(fullPost);
+        }
+        
+        res.status(200).json(fullPosts);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
@@ -79,28 +87,10 @@ const getPost = async (req, res) => {
     console.log(id);
     try {
         const post = await Post.findById(id);
-        const { type } = post;
-
-        if(type){
-            let fullPost = {};
-            switch (type) {
-                case "Discussion":
-                    fullPost = await post.populate("addition").execPopulate();
-                    res.status(200).json(fullPost);
-                    break;
-                case "Project":
-                    fullPost = await post.populate("addition").execPopulate();
-                    res.status(200).json(fullPost);
-                    break;
-                case "TeamUp":
-                    fullPost = await post.populate("addition").execPopulate();
-                    res.status(200).json(fullPost);
-                    break;
-                default:
-                    break;
-            }
-        }
-        
+        let fullPost = {};
+        fullPost = await post.populate("addition").execPopulate();
+        fullPost = await post.populate("author").execPopulate();
+        res.status(200).json(fullPost);
     } catch (error) {
         res.status(404).json({ message:error.message });
     }
