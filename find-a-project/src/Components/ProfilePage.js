@@ -1,9 +1,7 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { Typography } from '@material-ui/core';
-import Image from  '../Components/Image';
-import ProfileInformation from '../Components/ProfileInformation';
+import { Typography, Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ProfileSettings from '../Components/ProfileSettings'
 const useStyles = makeStyles({
@@ -32,10 +30,15 @@ export default function ProfilePage() {
     return (
     <Card>
       <CardContent>
-      <ProfileSettings ></ProfileSettings>
+      <ProfileSettings></ProfileSettings>
         <Typography>
-            <Image></Image>
-            <ProfileInformation> </ProfileInformation>
+        <Typography variant="h5" component="h2">
+          Profile
+        </Typography>
+        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> 
+            <Typography variant="h6" component="h2">
+            User1
+            </Typography>
             <Typography  className={classes.info}     variant="h6" component="h2">
             Major
             </Typography>

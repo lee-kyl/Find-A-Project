@@ -4,6 +4,9 @@ import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import { Grid } from "@material-ui/core";
 import ProfileSkills from "../Components/ProfileSkills";
+import { makeStyles } from "@material-ui/core/styles";
+
+
 export default function Profile() {
   // const skills=["c","c++","java"];
   // const handleSkill=(e)=>{

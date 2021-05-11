@@ -4,7 +4,7 @@ import * as api from '../../api/index.js';
 export const signup = (formData, history) => async (dispatch) => {
     try {
         const { data } = await api.signUp(formData);
-        dispatch({ type: USER_SIGN_UP, data });
+        dispatch({ type: USER_SIGN_UP, payload:data });
         history.push('/');  
     } catch (error) {
         console.log(error);
@@ -14,7 +14,7 @@ export const signup = (formData, history) => async (dispatch) => {
 export const signin = (formData, history) => async (dispatch) => {
     try {
         const { data } = await api.signIn(formData);
-        dispatch({ type: USER_SIGN_IN, data });
+        dispatch({ type: USER_SIGN_IN, payload:data });
         history.push('/');
     } catch (error) {
         console.log(error);

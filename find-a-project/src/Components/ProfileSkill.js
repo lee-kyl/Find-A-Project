@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   }));
+
+
+
+
 export default function Profile() {
     const classes = useStyles();
     const handleDelete = () => {

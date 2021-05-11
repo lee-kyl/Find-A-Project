@@ -6,6 +6,8 @@ import ProfileApplication from "../Components/ProfileApplication";
 import ProfileRecentActivity from "../Components/ProfileRecentActivity";
 import ProfileTeam from "../Components/ProfileTeam";
 import ProfilePlan from "../Components/ProfilePlan";
+
+
 export default function HomePage() {
   return (
     <>

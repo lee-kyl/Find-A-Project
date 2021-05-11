@@ -10,9 +10,6 @@ const profileSchema = new Schema({
         type:String,
         required:true
     },
-    tag:[{
-        type:String
-    }],
     selfintro: String,
     skill:[{
         type:String
