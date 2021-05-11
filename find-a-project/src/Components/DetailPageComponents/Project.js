@@ -19,8 +19,8 @@ const useStyle = makeStyles((theme) => ({
         padding:35
     },
     potrait:{
-        width:theme.spacing(7),
-        height: theme.spacing(7)
+        width:theme.spacing(15),
+        height: theme.spacing(15)
     },
     button:{
         paddingLeft:30,
@@ -46,7 +46,7 @@ export default function Project(){
                 bla
             </Typography>
             <Divider variant="middle"/>
-            <Button fullWidth variant="outlined" href="#">APPLY</Button>
+            <Button fullWidth variant="outlined" color="primary" href="#">APPLY</Button>
         </Card>
         </>
     );

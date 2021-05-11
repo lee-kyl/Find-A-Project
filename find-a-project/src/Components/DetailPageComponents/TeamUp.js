@@ -14,7 +14,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyle = makeStyles(() => ({
     root: {
-
         margin:35,
         padding:20,
         maxWidth:250,
@@ -29,30 +28,30 @@ export default function TeamUp(){
         <>
         <Card className={classes.root}>
             <List>
-                <ListItem alignItems="flex-start">
+                <ListItem>
                     <ListItemAvatar>
                         <Avatar>U</Avatar>
                     </ListItemAvatar>
                     <ListItemText>
-                        <Typography variant="h5">NAME</Typography>
+                        <Typography variant="h7">NAME</Typography>
                     </ListItemText>
                 </ListItem>
                 <Divider variant="middle"/>
-                <ListItem alignItems="flex-start">
+                <ListItem>
                     <ListItemAvatar>
                         <Avatar>U</Avatar>
                     </ListItemAvatar>
                     <ListItemText>
-                        <Typography variant="h5">NAME</Typography>
+                        <Typography variant="h7">NAME</Typography>
                     </ListItemText>
                 </ListItem>
                 <Divider variant="middle"/>
-                <ListItem alignItems="flex-start">
+                <ListItem>
                     <ListItemAvatar>
                         <Avatar>U</Avatar>
                     </ListItemAvatar>
                     <ListItemText>
-                        <Typography variant="h5">NAME</Typography>
+                        <Typography variant="h7">NAME</Typography>
                     </ListItemText>
                 </ListItem>
                 <Divider variant="middle"/>

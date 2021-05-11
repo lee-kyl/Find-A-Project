@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import GroupAddOutlinedIcon from '@material-ui/icons/GroupAddOutlined';
 import QuestionAnswerOutlinedIcon from '@material-ui/icons/QuestionAnswerOutlined';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
-
+import CommentBlock from '../CommentBlock';
 const useStyles = makeStyles(() => ({  
     root: {
         margin: 35,
@@ -22,6 +22,10 @@ const useStyles = makeStyles(() => ({
 
     Typography:{
         marginLeft: 10
+    },
+    flat:{
+        display:"flex",
+        flexDirection:"column"
     }
 
 }));
@@ -36,7 +40,7 @@ const iconMap = {
 export default function Content(props) {
     const classes = useStyles();
     return (
-        <>
+        <div>
         <Card className={classes.root}>
             <div className={classes.header}>
             <Typography variant="h4">
@@ -67,12 +71,13 @@ export default function Content(props) {
                 Lorem ipsum....
             </Typography>
         </Card>
-        <Card className={classes.root}>
+        <CommentBlock />
+        {/* <Card className={classes.root}>
             <Typography variant="h5">Comments:</Typography>
             <TextField fullWidth multiline label="Comment Here" rows={4} variant="outlined" />
             <Divider />
             <p>replies here</p>
-        </Card>
-        </> 
+        </Card> */}
+        </div> 
     );
 }
