@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {  
     Card,
     TextField,
@@ -40,11 +40,17 @@ const useStyle = makeStyles((theme) => ({
 
 export default function CommentBlock(){
     const classes = useStyle();
+    const [comment, setComment] = useState('');
+    const submitComment = () => {
+        // Handle Submission here
+        console.log(comment);
+    }
+
     return(
         <Card className={classes.root}>
             <Typography variant="h5">Comments:</Typography>
-            <TextField fullWidth multiline label="Comment Here" rows={4} variant="outlined" />
-            <Button classes={classes.submit} fullWidth variant="contained" color="primary" >SUBMIT COMMENT</Button>
+            <TextField fullWidth multiline rows={4} variant="outlined" onChange={(event) => setComment(event.target.value)}/>
+            <Button classes={classes.submit} fullWidth variant="contained" color="primary" onClick={submitComment}>SUBMIT COMMENT</Button>
             <Card>
             <List>
                 <ListItem>

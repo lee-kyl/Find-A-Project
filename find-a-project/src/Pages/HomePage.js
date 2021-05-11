@@ -13,8 +13,6 @@ export default function HomePage() {
                 <Profile></Profile>
             </Grid>
             <Grid item xs={5} style={{marginLeft: 20, marginRight: 20}}>
-                {/* <SearchBar></SearchBar> */}
-
                 <PostCardList></PostCardList>
             </Grid>
             <Grid item xs={3}>
