@@ -7,6 +7,7 @@ import { SignInForm } from "../Components/SignInForm";
 import Profile from "../Pages/Profile";
 import Setting from "../Components/ProfileChange";
 import Skills from "../Components/ProfileSkills";
+import Detail from "../Pages/Detail";
 export default function Routes() {
   return (
     <Switch>
@@ -18,6 +19,7 @@ export default function Routes() {
       <Route path="/signin" exact component={SignInForm} />
       <Route path="/Profile" exact component={Profile} />
       <Route path="/Setting" exact component={Setting}/>
+      <Route path="/Detail" exact component={Detail} />
     </Switch>
   );
 }

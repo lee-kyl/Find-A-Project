@@ -5,7 +5,7 @@ const { getProfile, createProfile, updateProfile } = require('../controller/prof
 
 //TODO put back auth middleware if everything tested well
 
-router.get('/getProfile', getProfile);
+router.get('/getProfile/:id', getProfile);
 router.post('/createProfile', createProfile);
 router.post('/updateProfile', updateProfile);
 
