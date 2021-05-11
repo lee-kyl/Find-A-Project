@@ -15,9 +15,9 @@ const createProfile = async (req, res) => {
 }
 
 const getProfile = async (req, res) => {
-    const { userId } = req.body;
+    const { id } = req.params;
     try {
-        const userProfile = await User.findById(userId).populate("profile");
+        const userProfile = await User.findById(id).populate("profile");
         res.status(200).json(userProfile);
     } catch (error) {
         res.status(404).json({ message: error.message });
