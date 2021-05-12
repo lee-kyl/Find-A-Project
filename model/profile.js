@@ -11,9 +11,7 @@ const profileSchema = new Schema({
         required:true
     },
     selfintro: String,
-    skill:[{
-        type:String
-    }],
+    skills:[String],
     team:{
         type:Schema.Types.ObjectId,
         ref:"Team"

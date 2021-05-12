@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { Typography, Avatar } from '@material-ui/core';
@@ -26,30 +27,33 @@ const useStyles = makeStyles({
     }
 });
 export default function ProfilePage() {
+  const { userProfile } = useSelector(state => state.profileData);
+  const { userType, firstName, lastName, email,profile } = userProfile;
+  const { school,major,selfintro } = profile;
    const classes=useStyles();
     return (
     <Card>
       <CardContent>
       <ProfileSettings></ProfileSettings>
         <Typography>
-        <Typography variant="h5" component="h2">
-          Profile
+        <Typography variant="h3" component="h2">
+          Personal Information
         </Typography>
         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> 
             <Typography variant="h6" component="h2">
-            User1
+            { firstName + " " + lastName }
             </Typography>
-            <Typography  className={classes.info}     variant="h6" component="h2">
-            Major
+            <Typography  className={classes.info}     variant="subtitle1" component="h2">
+            { school }
             </Typography>
-            <Typography className={classes.info} variant="h6" component="h2">
-            Phone
+            <Typography  className={classes.info}     variant="subtitle1" component="h2">
+            { major }
+            </Typography>
+           <Typography className={classes.info} variant="subtitle2" component="h2">
+            { email }
            </Typography>
-           <Typography className={classes.info} variant="h6" component="h2">
-            Email
-           </Typography>
-           <Typography className={classes.info} variant="h6" component="h2">
-            Detail
+           <Typography className={classes.info} variant="subtitle2" component="h2">
+            { selfintro }
            </Typography>
         </Typography>
       </CardContent>

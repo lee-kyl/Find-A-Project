@@ -1,14 +1,24 @@
 import { Grid } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from 'react-redux';
 import ProfilePage from "../Components/ProfilePage";
 import ProfileSkills from "../Components/ProfileSkill";
 import ProfileApplication from "../Components/ProfileApplication";
 import ProfileRecentActivity from "../Components/ProfileRecentActivity";
 import ProfileTeam from "../Components/ProfileTeam";
 import ProfilePlan from "../Components/ProfilePlan";
+import { loadProfile } from '../Redux/actions/profile';
 
 
 export default function HomePage() {
+  const dispatch = useDispatch();  
+  useEffect(async ()=>{
+      if(localStorage.getItem('profile')){
+      const { result } = JSON.parse(localStorage.getItem('profile'));
+      const { _id } = result;
+      dispatch(loadProfile(_id));
+      }
+  },[dispatch]);
   return (
     <>
       <Grid

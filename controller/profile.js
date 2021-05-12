@@ -25,15 +25,25 @@ const getProfile = async (req, res) => {
 }
 
 const updateProfile = async (req, res) => {
-    const { userId, school, major, tag, selfintro, skill, team  } = req.body;
+    const { userId, school, major, tag, selfintro, skills, team  } = req.body;
     try {
        const user = await User.findById(userId);
        const { profile } = user;
-       await Profile.findByIdAndUpdate(profile,{school, major, tag, selfintro, skill, team});
+       await Profile.findByIdAndUpdate(profile,{school, major, tag, selfintro, skills, team});
        res.status(200).send({ message: "profile updated" });
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
 }
 
-module.exports = { createProfile, getProfile, updateProfile };
+const updatePotrait = async (req, res) => {
+    const { userId, potrait } = req.body;
+    try {
+        await User.findByIdAndUpdate(userId, {potrait:potrait});
+        res.status(200).send({ message: "potrait updated" });
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+module.exports = { createProfile, getProfile, updateProfile, updatePotrait };

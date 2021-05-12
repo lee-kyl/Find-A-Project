@@ -20,13 +20,14 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Profile() {
-    const classes = useStyles();
-    const handleDelete = () => {
-    console.info('222');
- };
-  const handleClick = () => {
-    console.info('You clicked the Chip.');
-  };
+  const classes = useStyles();
+  const { userProfile } = useSelector(state => state.profileData);
+  const { profile } = userProfile;
+  const { skills } = profile;
+  console.log(skills);
+  const skillItems = skills.map((item) => (
+    <Chip label={item}  color="primary" />
+  ));
   return (
     <Card>
     <CardContent>
@@ -34,13 +35,8 @@ export default function Profile() {
        Skills
     </Typography>
     <div className={classes.root}>
-    <Chip label="Deletable primary"  color="primary" />
-    <Chip label="Deletable primary"  color="primary" />
-    <Chip label="Deletable primary"  color="primary" />
-    <Chip label="Deletable primary"  color="primary" />
-    <Chip label="Deletable primary"  color="primary" />
-    <Chip label="Deletable primary"  color="primary" />
-    <Chip label="Deletable primary"  color="primary" />
+      {skillItems}
+    {/* <Chip label={}  color="primary" /> */}
     </div>
     </CardContent>
   </Card> 

@@ -6,11 +6,12 @@ import Project from '../Components/DetailPageComponents/Project';
 import TeamUp from '../Components/DetailPageComponents/TeamUp';
 import { makeStyles } from '@material-ui/core/styles';
 import { loadPost } from '../Redux/actions/post';
+import Discussion from '../Components/DetailPageComponents/Discussion';
 
 
 const useStyle = makeStyles(() => ({
     root:{
-        display:"flex"
+        display:"flex",
     }
 
 }));
@@ -22,7 +23,7 @@ export default function DetailPage(props){
     useEffect( async () => {
         dispatch(loadPost(id));
     }, [dispatch])
-    
+
     const { postData } = useSelector(state => state.postData)
     const { type } = postData;
     const classes = useStyle();
@@ -31,7 +32,8 @@ export default function DetailPage(props){
         <div className={classes.root}>
             <Content />
             { type === 'Project' ? <Project /> : null }
-            { type === 'TeamUp' ? <TeamUp /> : null }    
+            { type === 'TeamUp' ? <TeamUp /> : null }
+            { type === 'Discussion' ? <Discussion /> : null }    
         </div>
 
     );

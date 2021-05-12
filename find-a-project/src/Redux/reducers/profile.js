@@ -1,13 +1,22 @@
 import { LOADPROFILE,MODPROFILE } from '../../constant/actionType';
 
 const initialState = {
-    "userNumber": "0",
-    "userType": "unknown",
-    "firstName": "unknown",
-    "lastName": "unknown",
-    "email": "unknown",
-    "potrait": null,
-    "addition":{}
+    schoolID: "0",
+    userType: "unknown",
+    firstName: "unknown",
+    lastName: "unknown",
+    email: "unknown",
+    potrait: null,
+    profile:{
+        school:"unknown",
+        major:"unknown",
+        selfintro:"unknown",
+        skills:["unknown"],
+        team:{
+            teamName:"unknown",
+            members:[{ firstName:"unknown",lastName:"unknown" }]
+        }
+    }
 }
 
 
