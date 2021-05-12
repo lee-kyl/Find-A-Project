@@ -123,7 +123,7 @@ export default function Header() {
     return (
       <Grid item xs={2}>
         <Button href="/signup">
-          <Typography variant="subtitle1">SIGNUP</Typography>
+          <Typography variant="subtitle1">SIGN UP</Typography>
         </Button>
       </Grid>
     );
@@ -240,7 +240,7 @@ export default function Header() {
               renderHiddenComponentWhenReachBreakPoint(
                 <Grid item xs={2}>
                   <Button href="/About">
-                    <img src={teamLogo} style={{width: 60, marginRight: 15}}/>
+                    <img src={teamLogo} style={{width: 45, marginRight: 15}}/>
                     <Typography variant="subtitle1">About Us</Typography>
                   </Button>
                 </Grid>

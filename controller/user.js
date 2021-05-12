@@ -30,7 +30,8 @@ const signin = async (req, res) => {
 
 
 const signup = async (req, res) => {
-    const { email, password, confirmPassword, firstName, lastName, userType, schoolID } = req.body;
+    const { email, password, confirmPassword, firstName, lastName, userType, schoolID, potrait } = req.body;
+    
     try {
         const registeredUser = await User.findOne({ email });
         if(registeredUser){
@@ -51,7 +52,8 @@ const signup = async (req, res) => {
             firstName,
             lastName,
             userType,
-            schoolID
+            schoolID,
+            potrait
         });
         //const token = {};
         const token = jwt.sign({ email: result.email, id: result._id, name: result.lastname}, 'demo', { expiresIn: "24h"});
