@@ -6,6 +6,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import teamLogo from '../Assets/team-icon.png';
+
 import {
   Avatar,
   Card,
@@ -54,7 +56,23 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     marginRight: theme.spacing(2),
   },
+  hideElement: {
+
+  }
 }));
+
+const useViewport = () => {
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  React.useEffect(() => {
+    const handleWindowResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
+  // Return the width so we can use it in our components
+  return { width };
+}
 
 export default function Header() {
   const classes = useStyles();
@@ -66,6 +84,9 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [user, setUser] = React.useState({});
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const { width } = useViewport();
+  const breakpoint = 1200;
+
 
   useEffect(() => {
     if (localStorage.getItem("profile")) {
@@ -121,15 +142,21 @@ export default function Header() {
   const renderUserButton = () => {
     return (
       <>
-        <Grid item xs={3}>
-          <Typography variant="subtitle1">Welcome back!</Typography>
-        </Grid>
-        <Grid item xs={1}>
-          <Button href="/Profile">
-            <Avatar style={{marginRight: 10}}>{user.firstName[0].toUpperCase()}</Avatar>
-          </Button>
-        </Grid>
-        <Grid item xs={3} onMouseLeave={handlePopoverClose}>
+        {
+          renderHiddenComponentWhenReachBreakPoint(
+            <>
+                        <Grid item xs={3}>
+            <Typography variant="subtitle1">Welcome back!</Typography>
+          </Grid>
+          <Grid item xs={1}>
+            <Button href="/Profile">
+              <Avatar style={{marginRight: 10}}>{user.firstName[0].toUpperCase()}</Avatar>
+            </Button>
+          </Grid>
+            </>
+          )
+        }
+        <Grid item sm={3} xs={12} onMouseLeave={handlePopoverClose}>
           <div className={classes.menu}>
             <div>
               <Button
@@ -191,18 +218,34 @@ export default function Header() {
     );
   };
 
+  const renderHiddenComponentWhenReachBreakPoint = (component) => {
+    if (width > breakpoint) {
+      return component;
+    }
+  }
+
   return (
     <>
       <AppBar position="static" color="transparent" className={classes.root}>
         <Toolbar>
           <Grid container justify="flex-start" alignItems="center">
-            <Grid item xs={4}>
-              
+            <Grid item xs={2}>
               <Button href="/">
                 <HomeOutlinedIcon style={{marginRight: 10}} />
                 <Typography variant="subtitle1">FIND A PROJECT</Typography>
               </Button>
             </Grid>
+
+            {
+              renderHiddenComponentWhenReachBreakPoint(
+                <Grid item xs={2}>
+                  <Button href="/About">
+                    <img src={teamLogo} style={{width: 60, marginRight: 15}}/>
+                    <Typography variant="subtitle1">About Us</Typography>
+                  </Button>
+                </Grid>
+              )
+            }
 
             <Grid item xs={2}></Grid>
 

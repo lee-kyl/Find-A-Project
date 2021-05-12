@@ -8,6 +8,7 @@ import Profile from "../Pages/Profile";
 import Setting from "../Components/ProfileChange";
 import Skills from "../Components/ProfileSkills";
 import Detail from "../Pages/Detail";
+import ComingSoonPage from "../Pages/ComingSoonPage";
 export default function Routes() {
   return (
     <Switch>
@@ -20,6 +21,7 @@ export default function Routes() {
       <Route path="/Profile" exact component={Profile} />
       <Route path="/Setting" exact component={Setting}/>
       <Route path="/post/getPost/:id" exact component={Detail} />
+      <Route path="/About" exact component={ComingSoonPage}/>
     </Switch>
   );
 }

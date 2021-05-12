@@ -20,13 +20,13 @@ export default function HomePage() {
     return (
         <>
         <Grid container flexdirection="column" justify="space-around" style={{marginTop: 20, marginBottom: 20}}>
-            <Grid item xs={3}>
+            <Grid item sm={3} xs={10}>
                 <Profile></Profile>
             </Grid>
-            <Grid item xs={5} style={{marginLeft: 20, marginRight: 20}}>
+            <Grid item sm={5} xs={10} style={{marginLeft: 20, marginRight: 20}}>
                 <PostCardList></PostCardList>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item sm={3} xs={10}>
                 <Notification></Notification>
             </Grid>
         </Grid>

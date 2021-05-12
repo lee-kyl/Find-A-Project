@@ -37,7 +37,6 @@ const iconMap = {
     "TeamUp": <GroupAddOutlinedIcon />
 }
 
-
 export default function Content(props) {
     const { postData } = useSelector(state => state.postData);
     const { title,createdAt,userType,content,type,author } = postData;
