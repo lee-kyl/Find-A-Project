@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
         Card,
         Divider,
@@ -31,19 +32,17 @@ const useStyle = makeStyles((theme) => ({
 
 export default function Project(){
     const classes = useStyle();
-
+    const { postData } = useSelector(state => state.postData);
+    const { author } = postData;
+    const { firstName,lastName,email } = author;
     return(
         <>
         <Card className={classes.root}>
-            <Avatar className={classes.potrait}>U</Avatar>
-            <Typography variant="h5">Sup_NAME</Typography>
+            <Avatar className={classes.potrait}>{firstName[0].toUpperCase()}</Avatar>
+            <Typography variant="h5">{firstName + "" + lastName}</Typography>
             <Typography variant="body1">
-                Supervisor Info
-                blabla
-                blabla
-                blablabla
-                blablabla
-                bla
+                Contact:<br />
+                { email }
             </Typography>
             <Divider variant="middle"/>
             <Button fullWidth variant="outlined" color="primary" href="#">APPLY</Button>

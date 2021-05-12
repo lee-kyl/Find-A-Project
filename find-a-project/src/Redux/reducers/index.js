@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import authReducer from './auth.js';
-import profileReducer from './profile.js';
+import profileData from './profile.js';
+import postData from './post.js';
 
 
 export default combineReducers({
     authReducer,
-    profileReducer
+    profileData,
+    postData
 });

@@ -19,7 +19,7 @@ export default function Routes() {
       <Route path="/signin" exact component={SignInForm} />
       <Route path="/Profile" exact component={Profile} />
       <Route path="/Setting" exact component={Setting}/>
-      <Route path="/Detail" exact component={Detail} />
+      <Route path="/post/getPost/:id" exact component={Detail} />
     </Switch>
   );
 }

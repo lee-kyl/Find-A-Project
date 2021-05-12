@@ -7,19 +7,16 @@ import PostCardList from '../Components/PostComponents/PostCardList'
 import { useDispatch } from 'react-redux';
 import { loadProfile } from '../Redux/actions/profile';
 
-export default function HomePage() {
-    const dispatch = useDispatch();
-    
-    useEffect(()=>{
+
+export default function HomePage() {  
+    const dispatch = useDispatch();  
+    useEffect(async ()=>{
         if(localStorage.getItem('profile')){
         const { result } = JSON.parse(localStorage.getItem('profile'));
-        console.log(result);
         const { _id } = result;
-        console.log(_id);
         dispatch(loadProfile(_id));
         }
-    },[]);
-    
+    },[dispatch]);
     return (
         <>
         <Grid container flexdirection="column" justify="space-around" style={{marginTop: 20, marginBottom: 20}}>

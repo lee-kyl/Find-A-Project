@@ -63,7 +63,7 @@ export default function PostCard(props) {
       <CardActions>
         <Grid container justify="space-between">
         <Grid item xs={3}>
-          <Button size="small" href={`/post/${props.post?._id}`}>Learn More</Button>
+          <Button size="small" href={`/post/getPost/${props.post?._id}`}>Learn More</Button>
         </Grid>
         <Grid item xs={8}>
           {props.children}
