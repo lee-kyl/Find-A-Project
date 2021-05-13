@@ -15,6 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { signup } from "../Redux/actions/auth";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
 const initialState = {
   firstName: "",
   lastName: "",
@@ -52,7 +53,7 @@ export const SignUpForm = () => {
   const classes = useStyles();
   const [formData, setFormData] = useState(initialState);
   const [value, setValue] = useState("student");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState({});
   const history = useHistory();
   const dispatch = useDispatch();
   const handleSignUp = (e) => {
@@ -61,7 +62,6 @@ export const SignUpForm = () => {
   };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value, potrait: image });
-    console.log({ ...formData, [e.target.name]: e.target.value, potrait: image });
   };
 
   const handleRadioChange = (e) => {
@@ -70,11 +70,31 @@ export const SignUpForm = () => {
   };
 
   const handleCapture = ({ target }) => {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(target.files[0]);
-    fileReader.onload = (e) => {
-      setImage(e.target.result);
-    };
+    // setImage(target.files[0]);
+console.log(target.files[0]);
+    const data = new FormData();
+    data.append('file', target.files[0]);
+    console.log(data);
+    fetch(
+      'http://localhost:5000/user/signup',
+      // 'https://freeimage.host/api/1/upload?key=6d207e02198a847aa98d0a2a901485a5',
+      {
+				method: 'POST',
+				body: data,
+			}
+    )
+    .then((response) => response.json())
+    .then((result) => {
+      console.log('Success:', result);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+    // const fileReader = new FileReader();
+    // fileReader.readAsDataURL(target.files[0]);
+    // fileReader.onload = (e) => {
+    //   setImage(e.target.result);
+    // };
   };
 
   return (

@@ -28,11 +28,12 @@ const signin = async (req, res) => {
     }
 }
 
-
 const signup = async (req, res) => {
     const { email, password, confirmPassword, firstName, lastName, userType, schoolID, potrait } = req.body;
-    
     try {
+        // res.status(200).json(req.body.name);
+        // const fs = require('fs');
+        // fs.writeFileSync('./assets/filename.txt', 'Hey there!');
         const registeredUser = await User.findOne({ email });
         if(registeredUser){
             return res.status(400).json({
@@ -60,7 +61,7 @@ const signup = async (req, res) => {
         res.status(200).json({ result, token });
     } catch (error) {
         res.status(500).json({ 
-            message: "Oops, something went wrong."
+            message: error.message
         });
     }
 }
@@ -75,4 +76,11 @@ const findUser = async (req, res) => {
     }
 }
 
-module.exports = { signin, signup, findUser };
+const uploadProfileImage = async (req, res) => {
+    res.status(200).json('Good');
+    const fs = require('fs');
+    fs.writeFileSync('/tmp/test-sync', 'Hey there!');
+    res.status(200).json(req);
+}
+
+module.exports = { signin, signup, findUser, uploadProfileImage };

@@ -7,7 +7,7 @@ const { getProfile, createProfile, updateProfile, updatePotrait } = require('../
 
 router.get('/getProfile/:id', getProfile);
 router.post('/createProfile', createProfile);
-router.post('/updateProfile', updateProfile);
+router.post('/updateProfile/:id', updateProfile);
 router.post('/updatePotrait', updatePotrait);
 
 module.exports = router;
