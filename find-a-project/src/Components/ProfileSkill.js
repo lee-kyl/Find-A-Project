@@ -20,7 +20,10 @@ export default function Profile() {
   const classes = useStyles();
   const { userProfile } = useSelector(state => state.profileData);
   const { profile } = userProfile;
-  const { skills } = profile;
+  let skills;
+  if (profile) {
+      skills = profile.skills;
+  }
   const skillItems = skills?.map((item) => (
     <Chip label={item}  color="primary" />
   ));

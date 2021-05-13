@@ -29,7 +29,12 @@ const useStyles = makeStyles({
 export default function ProfilePage() {
   const { userProfile } = useSelector(state => state.profileData);
   const { userType, firstName, lastName, email,profile } = userProfile;
-  const { school,major,selfintro } = profile;
+  let school, major, selfintro;
+  if (profile) {
+    school = profile.school;
+    major = profile.major;
+    selfintro = profile.selfintro;
+  }
    const classes=useStyles();
     return (
     <Card>

@@ -29,11 +29,8 @@ const signin = async (req, res) => {
 }
 
 const signup = async (req, res) => {
-    const { email, password, confirmPassword, firstName, lastName, userType, schoolID, potrait } = req.body;
+    const { email, password, confirmPassword, firstName, lastName, userType, schoolID } = req.body;
     try {
-        // res.status(200).json(req.body.name);
-        // const fs = require('fs');
-        // fs.writeFileSync('./assets/filename.txt', 'Hey there!');
         const registeredUser = await User.findOne({ email });
         if(registeredUser){
             return res.status(400).json({
@@ -47,14 +44,19 @@ const signup = async (req, res) => {
         }
         //the second argument for bcrypt hash is "salt".
         const hashPassword = await bcrypt.hash(password, 12);
+        // const userProfile = {
+        //     school: 'UTS',
+        //     major: 'FEIT',
+        //     selfintro: 'About me',
+        //     skills: ['React', 'JavaScript']
+        // };
+
         const result = await User.create({
             email,
             password: hashPassword,
             firstName,
             lastName,
             userType,
-            schoolID,
-            potrait
         });
         //const token = {};
         const token = jwt.sign({ email: result.email, id: result._id, name: result.lastname}, 'demo', { expiresIn: "24h"});

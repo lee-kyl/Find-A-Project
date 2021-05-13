@@ -23,8 +23,7 @@ const initialState = {
   userType: "student",
   schoolID: "",
   password: "",
-  confirmPassword: "",
-  potrait: ""
+  confirmPassword: ""
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -53,15 +52,15 @@ export const SignUpForm = () => {
   const classes = useStyles();
   const [formData, setFormData] = useState(initialState);
   const [value, setValue] = useState("student");
-  const [image, setImage] = useState({});
   const history = useHistory();
   const dispatch = useDispatch();
   const handleSignUp = (e) => {
     e.preventDefault();
+    console.log(formData);
     dispatch(signup(formData, history));
   };
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value, potrait: image });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleRadioChange = (e) => {
@@ -70,11 +69,8 @@ export const SignUpForm = () => {
   };
 
   const handleCapture = ({ target }) => {
-    // setImage(target.files[0]);
-console.log(target.files[0]);
     const data = new FormData();
     data.append('file', target.files[0]);
-    console.log(data);
     fetch(
       'http://localhost:5000/user/signup',
       // 'https://freeimage.host/api/1/upload?key=6d207e02198a847aa98d0a2a901485a5',
@@ -90,11 +86,6 @@ console.log(target.files[0]);
     .catch((error) => {
       console.error('Error:', error);
     });
-    // const fileReader = new FileReader();
-    // fileReader.readAsDataURL(target.files[0]);
-    // fileReader.onload = (e) => {
-    //   setImage(e.target.result);
-    // };
   };
 
   return (
@@ -105,10 +96,6 @@ console.log(target.files[0]);
           <Avatar className={classes.avatar}>U</Avatar>
         </div>
 
-        <Button variant="contained" component="label">
-          Upload Image
-          <input type="file" hidden onChange={handleCapture} />
-        </Button>
         <form onSubmit={handleSignUp}>
           <Grid container spacing={2}>
             <Grid item xs={12}>

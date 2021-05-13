@@ -81,6 +81,7 @@ export default function Profile() {
 
   const handleSubmit = () => {
     axios.post('http://localhost:5000/profile/updateProfile/' + userId, tempProfile).then(res => {
+      console.log(res);
       window.location.href = '/Profile'
     })
   }
@@ -106,6 +107,7 @@ export default function Profile() {
                     <Grid item xs={12}>
                       <TextField
                         id="school"
+                        label="What is your faculty"
                         name="school"
                         variant="outlined"
                         key={ school }
@@ -117,6 +119,7 @@ export default function Profile() {
                     <Grid item xs={12}>
                       <TextField
                         id="major"
+                        label="What is your major"
                         name="major"
                         variant="outlined"
                         value = {tempProfile?.major}
@@ -127,6 +130,7 @@ export default function Profile() {
                     <Grid item xs={12}>
                       <TextField
                         id="selfintro"
+                        label="About yourself"
                         name="selfintro"
                         rows={4}
                         variant="outlined"

@@ -202,7 +202,7 @@ export default function Header() {
                           >
                             Mailbox
                           </MenuItem>
-                          <MenuItem onClick={logoutButtonClicked} href="/">
+                          <MenuItem onClick={logoutButtonClicked} onClick={logoutButtonClicked}>
                             Log out
                           </MenuItem>
                         </MenuList>

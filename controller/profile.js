@@ -26,14 +26,23 @@ const getProfile = async (req, res) => {
 }
 
 const updateProfile = async (req, res) => {
-    // const userProfile = { school, major, tag, selfintro, skills, team  };
+           // const userProfile = { school, major, tag, selfintro, skills, team  };
     try {
         const { id } = req.params;
        const userId = id;
         const { school, major, tag, selfintro, skills, team  } = req.body;
-       const user = await User.findById(userId);
+       
+        const user = await User.findById(userId);
        const { profile } = user;
+       if (profile) {
        await Profile.findByIdAndUpdate(profile,{school, major, tag, selfintro, skills, team});
+    } else {
+           const userProfile = new Profile({ _id: new mongoose.Types.ObjectId, school, major, selfintro, skills});
+            await userProfile.save();
+
+            user.profile = userProfile;
+            await User.findByIdAndUpdate(userId, {...user});
+        }
     //    await Profile.findByIdAndUpdate(user, {...user, profile: userProfile});
        res.status(200).send({ message: "profile updated" });
     } catch (error) {

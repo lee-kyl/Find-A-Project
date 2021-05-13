@@ -28,7 +28,10 @@ const useStyles = makeStyles((theme) => ({
 export default function ProfileSkills() {
     const { userProfile } = useSelector(state => state.profileData);
     const { profile } = userProfile;
-    const { skills } = profile;
+    let skills;
+    if (profile) {
+        skills = profile.skills;
+    }
     const [hashtag, setHashtag] = useState("")
     const [arrayOfHashtags, addHashtag] = useState(skills)
 
