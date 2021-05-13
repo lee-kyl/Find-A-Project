@@ -26,15 +26,15 @@ export default function Profile() {
   const { school, major, selfintro, skills, potrait, team } = profile;
 
   const dispatch = useDispatch();
-    useEffect(async ()=>{
+  useEffect(async ()=>{
       if(localStorage.getItem('profile')){
       const { result } = JSON.parse(localStorage.getItem('profile'));
       const { _id } = result;
       dispatch(loadProfile(_id));
       }
-    },[]);
-
-  console.log(skillsArray);
+  },[]);
+  setInterval(()=>{ console.log(skills) },2000);
+  
   const handleClick = () => {
     setSkillsArray(skills);
     setIsHidden(false);

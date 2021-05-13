@@ -39,7 +39,7 @@ export default function ProfilePage() {
         <Typography variant="h3" component="h2">
           Personal Information
         </Typography>
-        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> 
+        <Avatar> { firstName[0].toString() } </Avatar> 
             <Typography variant="h6" component="h2">
             { firstName + " " + lastName }
             </Typography>

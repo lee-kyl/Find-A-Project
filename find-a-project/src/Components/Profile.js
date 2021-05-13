@@ -16,7 +16,7 @@ export default function Profile() {
         <Typography>
 
         </Typography>
-        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> 
+        <Avatar>{ firstName[0].toString() }</Avatar> 
       </CardContent>
     </Card>
   );

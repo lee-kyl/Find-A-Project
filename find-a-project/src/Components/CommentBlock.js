@@ -55,11 +55,10 @@ export default function CommentBlock(){
     const { comments } = postData;
     const idOfPost = postData._id
     const classes = useStyle();
-    const [formData, setFormData] = useState(initialState);
     const [comment, setComment] = useState('');
     const submitComment = () => {
         // Handle Submission here
-        setFormData({ ...formData, id:idOfPost, userId:currentId, content:comment});
+        const formData = { id:idOfPost, userId:currentId, content:comment};
         dispatch(createComment(formData,idOfPost));
     }
     
@@ -67,6 +66,10 @@ export default function CommentBlock(){
     // const { firstName, lastName } = author;
     const handleDelete = (id,postId) => {
         dispatch(deleteComment(id,postId));
+    }
+
+    const handleRedirect = (targetUser) => {
+        window.location.href = `/Profile/${targetUser}`;
     }
 
     const commentBlocks = comments.map((item) => {
@@ -78,7 +81,7 @@ export default function CommentBlock(){
             <List>
                 <ListItem>
                     <ListItemAvatar>
-                        <Avatar className={classes.potrait}>U</Avatar>
+                        <Avatar className={classes.potrait} onClick={() => {handleRedirect(_id)}}>{firstName[0].toString()}</Avatar>
                     </ListItemAvatar>
                     <ListItemText>
                         <Typography variant="h7">
