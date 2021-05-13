@@ -57,6 +57,7 @@ const signup = async (req, res) => {
             firstName,
             lastName,
             userType,
+            schoolID
         });
         //const token = {};
         const token = jwt.sign({ email: result.email, id: result._id, name: result.lastname}, 'demo', { expiresIn: "24h"});
