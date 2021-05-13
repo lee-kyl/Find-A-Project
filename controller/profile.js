@@ -34,6 +34,7 @@ const updateProfile = async (req, res) => {
        const user = await User.findById(userId);
        const { profile } = user;
        await Profile.findByIdAndUpdate(profile,{school, major, tag, selfintro, skills, team});
+    //    await Profile.findByIdAndUpdate(user, {...user, profile: userProfile});
        res.status(200).send({ message: "profile updated" });
     } catch (error) {
         res.status(404).json({ message: error.message });
