@@ -52,14 +52,15 @@ export default function CommentBlock(){
     const { result } = JSON.parse(localStorage.getItem('profile'));
     const currentId  = result._id;
     const { postData } = useSelector(state => state.postData);
-    const { comments,_id } = postData;
+    const { comments } = postData;
+    const idOfPost = postData._id
     const classes = useStyle();
     const [formData, setFormData] = useState(initialState);
     const [comment, setComment] = useState('');
     const submitComment = () => {
         // Handle Submission here
-        setFormData({ ...formData, id:_id, userId:currentId, content:comment});
-        dispatch(createComment(formData,_id));
+        setFormData({ ...formData, id:idOfPost, userId:currentId, content:comment});
+        dispatch(createComment(formData,idOfPost));
     }
     
     // const { content, author } = comments;
@@ -70,6 +71,7 @@ export default function CommentBlock(){
 
     const commentBlocks = comments.map((item) => {
         const { content, author,  postId } = item;
+        const commentId = item._id;
         const { firstName, lastName, userType, _id } = author;
         return(
         <Card>
@@ -88,7 +90,7 @@ export default function CommentBlock(){
                 <Typography className={classes.reply} variant="body1">
                     { content }
                     { currentId === _id ? 
-                    <Button variant="text" color="secondary" onClick={()=>{handleDelete(_id,postId)}}>DELETE</Button>
+                    <Button variant="text" color="secondary" onClick={()=>{handleDelete(commentId,postId)}}>DELETE</Button>
                     : null }
                 </Typography>
             </List>

@@ -27,8 +27,8 @@ export const createComment = (formData,postId) => async (dispatch) => {
         console.log(formData);
         console.log(postId);
         await api.createComment(formData);
-        console.log(data);
         const { data } = await api.loadPost(postId);
+        console.log(data);
         dispatch({ type: CREATECOMMENT, payload: data });
     } catch (error) {
         console.log(error);
