@@ -35,7 +35,7 @@ export default function Profile() {
   const [skillInput, setSkillInputChange] = useState('');
 
   const dispatch = useDispatch();
-    useEffect(async ()=>{
+  useEffect(async ()=>{
       if(localStorage.getItem('profile')){
         const { result } = JSON.parse(localStorage.getItem('profile'));
         const { _id } = result;
@@ -64,7 +64,7 @@ export default function Profile() {
     if (!skillInput) {
       return;
     }
-    
+
     if (tempProfile?.skills) {
       setTempProfile({ ...tempProfile, skills: [...tempProfile?.skills, skillInput] });
     } else {

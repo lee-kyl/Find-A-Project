@@ -12,10 +12,10 @@ const getTeam = async (req, res) => {
 }
 
 const createTeam = async (req, res) => {
-    const { id } = req.userId;
-    const { teamName } = req.body;
+    //const { id } = req.userId;
+    const { teamName, userId } = req.body;
     try {
-        const team = new Team({teamName, $push:{ members:id }});
+        const team = new Team({teamName, $push:{ members:userId }});
         await team.save();
         res.status(201).json(team);
     } catch (error) {

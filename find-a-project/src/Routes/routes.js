@@ -24,6 +24,7 @@ export default function Routes() {
       <Route path="/post/getPost/:id" exact component={Detail} />
       <Route path="/About" exact component={ComingSoonPage}/>
       <Route path="/Settings" exact component={SetProfile}/>
+      <Route path="/Profile/:id" exact component={Profile} />
     </Switch>
   );
 }

@@ -1,6 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { useParams } from "react-router-dom";
 import ProfilePage from "../Components/ProfilePage";
 import ProfileSkills from "../Components/ProfileSkill";
 import ProfileApplication from "../Components/ProfileApplication";
@@ -12,11 +13,16 @@ import { loadProfile } from '../Redux/actions/profile';
 
 export default function HomePage() {
   const dispatch = useDispatch();  
+  const { id } = useParams();
   useEffect(async ()=>{
       if(localStorage.getItem('profile')){
       const { result } = JSON.parse(localStorage.getItem('profile'));
       const { _id } = result;
-      dispatch(loadProfile(_id));
+        if(id){
+          dispatch(loadProfile(id));
+        }else{
+          dispatch(loadProfile(_id));
+        }
       }
   },[dispatch]);
   return (
