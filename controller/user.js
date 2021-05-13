@@ -65,4 +65,14 @@ const signup = async (req, res) => {
     }
 }
 
-module.exports = { signin, signup };
+const findUser = async (req, res) => {
+    const { id } = req.body;
+    try {
+        const user = User.findById(id);
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(404).json({ message:error.message });
+    }
+}
+
+module.exports = { signin, signup, findUser };

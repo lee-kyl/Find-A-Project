@@ -9,3 +9,4 @@ export const loadProfile = (userId) => async (dispatch) => {
         console.log(error);
     }
 }
+

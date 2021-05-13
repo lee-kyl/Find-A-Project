@@ -26,5 +26,5 @@ const applicationSchema = new Schema({
     comment: String
 });
 
-const Application = applicationSchema.model('Application',applicationSchema);
+const Application = mongoose.model("Application",applicationSchema);
 module.exports = Application;

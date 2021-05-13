@@ -13,6 +13,9 @@ import {
     Chip
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector,useDispatch } from 'react-redux';
+import { deleteComment,createComment } from '../Redux/actions/post';
+
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -38,20 +41,38 @@ const useStyle = makeStyles((theme) => ({
 
 }));
 
+const initialState = {
+    id:"",
+    userId:"",
+    content:"",  
+}
+
 export default function CommentBlock(){
+    const dispatch = useDispatch();
+    const { result } = JSON.parse(localStorage.getItem('profile'));
+    const currentId  = result._id;
+    const { postData } = useSelector(state => state.postData);
+    const { comments,_id } = postData;
     const classes = useStyle();
+    const [formData, setFormData] = useState(initialState);
     const [comment, setComment] = useState('');
     const submitComment = () => {
         // Handle Submission here
-        console.log(comment);
+        setFormData({ ...formData, id:_id, userId:currentId, content:comment});
+        dispatch(createComment(formData,_id));
+    }
+    
+    // const { content, author } = comments;
+    // const { firstName, lastName } = author;
+    const handleDelete = (id,postId) => {
+        dispatch(deleteComment(id,postId));
     }
 
-    return(
-        <Card className={classes.root}>
-            <Typography variant="h5">Comments:</Typography>
-            <TextField fullWidth multiline rows={4} variant="outlined" onChange={(event) => setComment(event.target.value)}/>
-            <Button classes={classes.submit} fullWidth variant="contained" color="primary" onClick={submitComment}>SUBMIT COMMENT</Button>
-            <Card>
+    const commentBlocks = comments.map((item) => {
+        const { content, author,  postId } = item;
+        const { firstName, lastName, userType, _id } = author;
+        return(
+        <Card>
             <List>
                 <ListItem>
                     <ListItemAvatar>
@@ -59,18 +80,27 @@ export default function CommentBlock(){
                     </ListItemAvatar>
                     <ListItemText>
                         <Typography variant="h7">
-                            USERNAME
+                            { firstName + " " + lastName }
                         </Typography>    
-                        <Chip className={classes.tag} variant="outlined" label="Student" color="primary"/>
+                        <Chip className={classes.tag} variant="outlined" label={ userType } color="primary"/>
                     </ListItemText>
                 </ListItem>
                 <Typography className={classes.reply} variant="body1">
-                    Some Reply
-                    <Button variant="text" color="secondary">DELETE</Button>
+                    { content }
+                    { currentId === _id ? 
+                    <Button variant="text" color="secondary" onClick={()=>{handleDelete(_id,postId)}}>DELETE</Button>
+                    : null }
                 </Typography>
-
             </List>
-            </Card>
+        </Card>
+        );
+    });
+    return(
+        <Card className={classes.root}>
+            <Typography variant="h5">Comments:</Typography>
+            <TextField fullWidth multiline rows={4} variant="outlined" onChange={(event) => setComment(event.target.value)}/>
+            <Button classes={classes.submit} fullWidth variant="contained" color="primary" onClick={submitComment}>SUBMIT COMMENT</Button>
+            { commentBlocks }
         </Card>
     );
 }

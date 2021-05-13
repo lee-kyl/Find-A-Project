@@ -4,6 +4,7 @@ const Project = require('../model/project.js');
 const TeamUp = require('../model/teamup.js');
 const User = require('../model/user.js');
 const mongoose = require('mongoose');
+const Comment = require('../model/comment.js');
 
 const getPosts = async (req, res) => {
     try {
@@ -23,7 +24,8 @@ const getPosts = async (req, res) => {
 }
 
 const createPost = async (req, res) => {
-    const { type, userId } = req.body;
+    const userId = req.UserId;
+    const { type } = req.body;
     let user = {};
     try {
        user = await User.findById(userId);
@@ -87,9 +89,19 @@ const getPost = async (req, res) => {
     console.log(id);
     try {
         const post = await Post.findById(id);
-        let fullPost = {};
-        fullPost = await post.populate("addition").execPopulate();
-        fullPost = await post.populate("author").execPopulate();
+        let fullPost = await post.populate("addition").populate("author").execPopulate();
+        const comments = await Comment.find({ postId: id }).populate("author");
+        let commentsArray = []
+        //fullPost = await post.populate("author").execPopulate();
+        //ullPost = await post.populate({path:"comments.[0]"}).execPopulate();
+        for(let i = 0; i < comments.length; i++){
+            commentsArray.push(comments[i]);
+        }
+        console.log(commentsArray);
+        //fullPost = await fullPost.comments.populate("author").execPopulate(); 
+
+        fullPost.comments = commentsArray;
+        //console.log(fullPost);
         res.status(200).json(fullPost);
     } catch (error) {
         res.status(404).json({ message:error.message });

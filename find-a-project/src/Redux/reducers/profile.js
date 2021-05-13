@@ -1,4 +1,4 @@
-import { LOADPROFILE,MODPROFILE } from '../../constant/actionType';
+import { LOADPROFILE,MODPROFILE,CHANGESKILLS } from '../../constant/actionType';
 
 const initialState = {
     schoolID: "0",
@@ -26,7 +26,8 @@ const profileData = ( state = { userProfile:initialState }, action) => {
             console.log(action.payload);
             return {...state, userProfile:action?.payload};
         case MODPROFILE:
-            break;  
+
+            break;
         default:
             return state;
     }

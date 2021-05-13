@@ -3,7 +3,8 @@ const User = require('../model/user.js');
 const mongoose = require('mongoose');
 
 const createProfile = async (req, res) => {
-    const { userId, school, major, tag, selfintro, skill, team  } = req.body;
+    const userId = req.UserId;
+    const { school, major, tag, selfintro, skill, team  } = req.body;
     try {
         const profile = new Profile({ _id: new mongoose.Types.ObjectId, school, major, tag, selfintro, skill, team });
         await profile.save();
@@ -25,7 +26,8 @@ const getProfile = async (req, res) => {
 }
 
 const updateProfile = async (req, res) => {
-    const { userId, school, major, tag, selfintro, skills, team  } = req.body;
+    const userId = req.UserId;
+    const { school, major, tag, selfintro, skills, team  } = req.body;
     try {
        const user = await User.findById(userId);
        const { profile } = user;
@@ -37,7 +39,8 @@ const updateProfile = async (req, res) => {
 }
 
 const updatePotrait = async (req, res) => {
-    const { userId, potrait } = req.body;
+    const userId = req.UserId;
+    const { potrait } = req.body;
     try {
         await User.findByIdAndUpdate(userId, {potrait:potrait});
         res.status(200).send({ message: "potrait updated" });

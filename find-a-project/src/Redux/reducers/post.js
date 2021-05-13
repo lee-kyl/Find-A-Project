@@ -1,4 +1,4 @@
-import { LOADPOST,CREATEPOSTS } from '../../constant/actionType';
+import { LOADPOST,CREATEPOSTS,DELETECOMMENT,CREATECOMMENT } from '../../constant/actionType';
 
 const initialState={
     _id:"LOADING...",
@@ -15,7 +15,8 @@ const initialState={
             teamName:"LOADING...",
             members:[{ firstName:"LOADING",lastName:"LOADING" }]
         }
-     }
+    },
+    comments:[]
 }
 
 const postData = (state = { postData:initialState }, action) => {
@@ -23,6 +24,10 @@ const postData = (state = { postData:initialState }, action) => {
         case LOADPOST:
         return {...state, postData:action?.payload};
         case CREATEPOSTS:
+        return {...state, postData:action?.payload};
+        case CREATECOMMENT:
+        return { ...state, postData:action?.payload};
+        case DELETECOMMENT:
         return {...state, postData:action?.payload};
         default:
         return state;

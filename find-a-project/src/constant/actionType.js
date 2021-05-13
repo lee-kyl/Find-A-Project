@@ -7,3 +7,7 @@ export const LOADPOST = 'LOADPOST';
 export const LOADPOSTS = 'LOADPOSTS';
 export const CREATEPOSTS = 'CREATEPOST';
 export const DELETPOSTS = 'DELETEPOST';
+export const CREATECOMMENT = 'CREATECOMMENT';
+export const DELETECOMMENT = 'DELETECOMMENT';
+export const GETCOMMENT = 'GETCOMMENT';
+export const LOADCOMMENT = 'LOADCOMMENT';

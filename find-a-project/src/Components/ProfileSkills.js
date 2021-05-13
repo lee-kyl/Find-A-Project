@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -25,52 +26,51 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfileSkills() {
-    const classes = useStyles();
-    const handleChange = (e) => {
-        a = e.target.value;
+    const { userProfile } = useSelector(state => state.profileData);
+    const { profile } = userProfile;
+    const { skills } = profile;
+    const [hashtag, setHashtag] = useState("")
+    const [arrayOfHashtags, addHashtag] = useState(skills)
+
+    const handleDelete = (h) => () => {
+      addHashtag((arrayOfHashtags) =>
+        arrayOfHashtags.filter((hashtag) => hashtag !== h)
+      )
     }
-    const handleClick = () => {
-        const newObj = { key: skills.length, label: a };
-        setSkills([...skills, newObj]);
-        console.log(skills);
+    const handleHashtagChange = (event) => setHashtag(event.target.value)
+  
+  
+    const newHashtag = () => {
+        addHashtag((arrayOfHashtags) => arrayOfHashtags.concat(hashtag))
+     
     }
-    var a = "";
-    let skill = [{ key: 0, label: "java" }, { key: 1, label: "c" }, { key: 2, label: "c++" }];
-    const [skills, setSkills] = React.useState(skill);
-    const handleDelete = (e) => () => {
-        setSkills((chips) => chips.filter((chip) => chip.key !== e.key));
-    }
+    const Hashtags = arrayOfHashtags.map((h) => (
+      <Chip
+        size="small"
+        label={h}
+        onDelete={handleDelete(h)}
+      />
+    ))
+
     return (
         <Paper >
-            <TextField
-                id="Skills"
-                name="Skills"
-                label="Skills"
+             <TextField
+                size="small"
+                inputProps={{
+                style: { fontSize: 15 },
+                }}
+                id="outlined-multiline-static"
+                multiline
+                rows={1}
+                placeholder="Description"
                 variant="outlined"
-                defaultValue="  "
-                onChange={handleChange} 
+                value={hashtag}
+                onChange={handleHashtagChange}
             />
-            <Button variant="contained" onClick={handleClick}>add</Button>
-
-            <Card >
-                <CardContent component="ul" className={classes.root}>
-                    {
-                        skills.map((data) => {
-                            let icon;
-                            return (
-                                <li key={data.key}>
-                                    <Chip
-                                        icon={icon}
-                                        label={data.label}
-                                        onDelete={handleDelete(data)}
-                                        color="primary"
-                                    />
-                                </li>
-                            );
-                        })}
-                </CardContent>
-            </Card>
-
+        <Button color="primary" onClick={newHashtag}>
+            Create!
+        </Button>
+                { Hashtags }
         </Paper>
     );
 }

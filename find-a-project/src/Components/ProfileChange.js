@@ -1,17 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
-import { Grid } from "@material-ui/core";
+import { Button, Grid,Chip } from "@material-ui/core";
 import ProfileSkills from "../Components/ProfileSkills";
 import { makeStyles } from "@material-ui/core/styles";
+import { loadProfile } from '../Redux/actions/profile'
 
+const initProfile = {
+    school:"N/A",
+    major:"N/A",
+    selfintro:"This guy is too lazy to write something",
+    skills:[],
+    potrait:null,
+    team:[]
+};
 
 export default function Profile() {
-  // const skills=["c","c++","java"];
-  // const handleSkill=(e)=>{
-  //   e.target
-  // }
+  const [formData, setFormData] = useState(initProfile);
+  const [skillsArray, setSkillsArray] = useState([]);
+  const [isHidden, setIsHidden] = useState(true);
+  const { userProfile } = useSelector(state => state.profileData);
+  const { profile } = userProfile;
+  const { school, major, selfintro, skills, potrait, team } = profile;
+
+  const dispatch = useDispatch();
+    useEffect(async ()=>{
+      if(localStorage.getItem('profile')){
+      const { result } = JSON.parse(localStorage.getItem('profile'));
+      const { _id } = result;
+      dispatch(loadProfile(_id));
+      }
+    },[]);
+
+  console.log(skillsArray);
+  const handleClick = () => {
+    setSkillsArray(skills);
+    setIsHidden(false);
+  }
+  const skillItems = skillsArray.map((item) => (
+    <Chip label={item}  color="primary" />
+  ));
+
+  const handleSubmit = (e) => {
+    if(profile){
+      setFormData({...formData, school, major, selfintro, skills, potrait, team});
+    }
+    setFormData({...formData, [e.target.name]: e.target.value});
+  }
   return (
     <Grid
       container
@@ -23,38 +60,18 @@ export default function Profile() {
       <Grid item xs={6}>
         <Card>
           <CardContent>
-            <form noValidate autoComplete="off">
+            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
               <Grid container justify="center">
                 <Grid item xs={3}></Grid>
                 <Grid item xs={5}>
                   <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                      <TextField
-                        id="First-Name"
-                        name="FirstName"
-                        label="First Name"
-                        variant="outlined"
-                        defaultValue="Kun"
-                        fullWidth
-                      />
-                    </Grid>
-                    <Grid item xs={6}>
-                      <TextField
-                        id="Last-Name"
-                        name="LastName"
-                        label="Last Name"
-                        variant="outlined"
-                        defaultValue="Chen"
-                        fullWidth
-                      />
-                    </Grid>
                     <Grid item xs={12}>
                       <TextField
                         id="school"
                         name="school"
                         label="School"
                         variant="outlined"
-                        defaultValue="UTS"
+                        key={ school }
                         fullWidth
                       />
                     </Grid>
@@ -64,44 +81,34 @@ export default function Profile() {
                         name="major"
                         label="Major"
                         variant="outlined"
-                        defaultValue="IT"
                         fullWidth
                       />
                     </Grid>
                     <Grid item xs={12}>
                       <TextField
-                        id="email"
-                        name="email"
-                        label="Email"
-                        type="email"
-                        variant="outlined"
-                        defaultValue="123@gmail.com"
-                        fullWidth
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        id="phone"
-                        name="phone"
-                        label="Phone"
-                        variant="outlined"
-                        defaultValue="123"
-                        fullWidth
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        id="detail"
-                        label="Detail"
+                        id="selfintro"
+                        label="Sefl-Introduction"
                         multiline
                         rows={4}
-                        defaultValue="Detail"
                         variant="outlined"
                         fullWidth
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <ProfileSkills></ProfileSkills>
+                    <TextField
+                        id="skills"
+                        label="Skills"
+                        variant="outlined"
+                        fullWidth
+                      />
+                    <Button fullWidth color="primary" onClick={handleClick}>YOUR SKILL</Button>
+                    <Button fullWidth color="secondary">ADD SKILL</Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                    { isHidden === false ? skillItems : null }
+                    </Grid>
+                    <Grid item xs={12}>
+                    <Button type="submit" variant="outlined"  fullWidth color="primary">SAVE</Button>
                     </Grid>
                   </Grid>
                 </Grid>

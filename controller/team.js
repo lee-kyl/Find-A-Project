@@ -2,7 +2,7 @@ const Team = require('../model/team');
 
 const getTeam = async (req, res) => {
     //this id is user's _id in localstorage
-    const { userId } = req.body;
+    const userId = req.userId;
     try {
         const team = await Team.findOne({ members: userId });
         res.status(200).json(team);
@@ -12,7 +12,7 @@ const getTeam = async (req, res) => {
 }
 
 const createTeam = async (req, res) => {
-    const { id } = req.body.userId;
+    const { id } = req.userId;
     const { teamName } = req.body;
     try {
         const team = new Team({teamName, $push:{ members:id }});
@@ -38,7 +38,7 @@ const updateTeam = async (req, res) => {
 
 const leaveTeam = async (req, res) => {
     const { id } = req.params;
-    const { userId } = req.body;
+    const { userId } = req.userId;
     try {
         await Team.findByIdAndUpdate(id, {$pull:{ member: userId }});
         res.status(200).send({ message: "Operation LeaveTeam is done" });
@@ -59,7 +59,7 @@ const deleteTeam = async (req, res) => {
 
 const superviseTeam = async (req, res) => {
     const { id } = req.params;
-    const { userId } = req.body;
+    const userId = req.userId;
     try {
        await Team.findByIdAndUpdate(id, {supervisor:userId});
     } catch (error) {
