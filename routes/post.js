@@ -7,7 +7,7 @@ const { getPosts, getPost, createPost, modifyPost, deletePost } = require('../co
 
 router.get('/getPosts', getPosts);
 router.get('/getPost/:id', getPost); 
-router.post('/createPost', auth, createPost);
+router.post('/createPost/:id', createPost);
 router.post('/modifyPost', auth, modifyPost);
 router.delete('/deletePost', auth, deletePost);
 

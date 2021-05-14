@@ -24,11 +24,13 @@ const getPosts = async (req, res) => {
 }
 
 const createPost = async (req, res) => {
-    const userId = req.UserId;
-    const { type } = req.body;
+        // const userId = req.UserId;
+        const { id } = req.params;
+        const userID = id;
+        const { type } = req.body;
     let user = {};
     try {
-       user = await User.findById(userId);
+       user = await User.findById(userID);
     } catch (error) {
        res.status(404).json({ message: error.message });
     }
