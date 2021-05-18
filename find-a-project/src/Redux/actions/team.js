@@ -23,7 +23,9 @@ export const updateTeam = (id,formData) => async (dispatch) => {
 export const getTeam = (id) => async (dispatch) => {
    try {
       const { data } = await api.getTeam(id);
+      if(data !== null){
       dispatch({ type:GETTEAM, payload:data});
+      }
    } catch (error) {
       console.log(error);
    }

@@ -5,7 +5,9 @@ export const loadRecent = (id) => async (dispatch) => {
     
     try {
         const { data } = await api.getComments(id);
+        if(data !== null){
         dispatch( {type: LOADCOMMENT, payload: data});
+        }
     } catch (error) {
         console.log(error);
     }
