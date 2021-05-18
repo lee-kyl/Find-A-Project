@@ -5,9 +5,13 @@ const mongoose = require('mongoose');
 const getComments = async (req, res) => {
     //this is to get comments sended by a user, whole commentlist will load with Post
     try {
-        const userId = req.UserId;
-        const comments = await Comment.findOne({author:userId});
-        res.status(200).json(comments);
+        const { id } = req.params;
+        const comments = await Comment.find({author:id});
+        const commentsData = [];
+        for(let i = 0; i < comments.length; i++){
+            commentsData.push(comments[i]);
+        }
+        res.status(200).json(commentsData);
     } catch (error) {
         res.status(404).json({ message:error.message });
     }

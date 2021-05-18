@@ -50,7 +50,7 @@ export default function PostCard(props) {
   return (
     <Card className={classes.root}>
     <CardHeader
-        avatar={<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />}
+        avatar={<Avatar>P</Avatar>}
         title={props.post?.title}
         style={{...colorMap[props.post?.type], color: 'white', font: 'bold'}}
         action={iconMap[props.post?.type]}

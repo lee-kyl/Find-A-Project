@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -7,6 +8,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
+import { loadRecent } from '../Redux/actions/recentActivity';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,6 +20,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InsetDividers() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { result } = JSON.parse(localStorage.getItem('profile'));
+  const id = result._id
+  useEffect(() => {
+    dispatch(loadRecent(id));
+  }, []);
+  const { activities } = useSelector(state => state.activitiesData);
+  const activityItems = activities.map((item)=>{
+    const { content,createdAt } = item;
+    return(
+      <ListItem>
+        <ListItemText primary={"\"" + content + "\""} secondary= {"\"" + createdAt + "\""} />
+      </ListItem>
+    );
+  });
 
   return (
     <Card>
@@ -26,9 +43,8 @@ export default function InsetDividers() {
        Recent Activities
     </Typography>
     <List className={classes.root}>
-      <ListItem>
-        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-      </ListItem>
+      { activityItems }
+{/*       
       <Divider variant="inset" component="li" />
       <ListItem>    
         <ListItemText primary="Work" secondary="Jan 7, 2014" />
@@ -36,7 +52,7 @@ export default function InsetDividers() {
       <Divider variant="inset" component="li" />
       <ListItem>
         <ListItemText primary="Vacation" secondary="July 20, 2014" />
-      </ListItem>
+      </ListItem> */}
     </List>
     </CardContent>
   </Card> 

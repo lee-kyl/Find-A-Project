@@ -11,3 +11,6 @@ export const CREATECOMMENT = 'CREATECOMMENT';
 export const DELETECOMMENT = 'DELETECOMMENT';
 export const GETCOMMENT = 'GETCOMMENT';
 export const LOADCOMMENT = 'LOADCOMMENT';
+export const LOADTEAM = 'LOADTEAM';
+export const UPDATETEAM = 'UPDATETEAM';
+export const GETTEAM = 'GETTEAM';

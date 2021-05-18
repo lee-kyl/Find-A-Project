@@ -49,8 +49,16 @@ const initialState = {
 
 export default function CommentBlock(){
     const dispatch = useDispatch();
-    const { result } = JSON.parse(localStorage.getItem('profile'));
-    const currentId  = result._id;
+    let user;
+    if(JSON.parse(localStorage.getItem('profile'))){
+        user = JSON.parse(localStorage.getItem('profile'));
+    }
+    let result;
+    let currentId;
+    if(user){
+        result = user.result;
+        currentId  = result._id;
+    }
     const { postData } = useSelector(state => state.postData);
     const { comments } = postData;
     const idOfPost = postData._id

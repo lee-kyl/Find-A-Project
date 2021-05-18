@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -7,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { getTeam } from '../Redux/actions/team';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +19,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ListDividers() {
+  const { result } = JSON.parse(localStorage.getItem('profile'));
+  const id = result._id;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTeam(id))
+  }, []);
+
+  const { team } = useSelector(state => state.teamData);
+  const { members,teamName } = team;
+  const membersItems = members.map((item)=>{
+    const { firstName, lastName } = item;
+    return(
+      <>
+        <Divider />
+          <ListItem >
+            <ListItemText primary={ firstName + " " + lastName } />
+          </ListItem>
+        <Divider />
+      </>
+    );
+  });
   const classes = useStyles();
 
   return (
@@ -28,24 +51,12 @@ export default function ListDividers() {
     <List component="nav" className={classes.root} aria-label="mailbox folders">
       <ListItem >
         <ListItemText  >
-        <Typography variant="h6" component="h2">
-       Team Name
-    </Typography>
+          <Typography variant="h6" component="h2">
+            { teamName }
+          </Typography>
         </ListItemText>
       </ListItem>
-      <Divider />
-      <ListItem >
-        <ListItemText primary="M2" />
-      </ListItem>
-      <Divider />
-      <ListItem >
-        <ListItemText primary="M3" />
-      </ListItem>
-      <Divider />
-      <ListItem >
-        <ListItemText primary="M4" />
-      </ListItem>
-      <Divider />
+      { membersItems }
     </List>
     </CardContent>
   </Card>

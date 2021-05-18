@@ -16,3 +16,7 @@ export const loadPost = (postId) => API.get(`/post/getPost/${postId}`);
 export const updateProfile = (formData) => API.post('/profile/updateProfile',formData);
 export const deleteComment = (id) => API.delete(`/comment/deleteComment/${id}`);
 export const createComment = (formData) => API.post('/comment/createComment/',formData);
+export const loadTeam = (id) => API.get(`/team/loadTeam/${id}`);
+export const updateTeam = (id,formData) => API.post(`/team/updateTeam/${id}`,formData);
+export const getComments = (id) => API.get(`/comment/getComments/${id}`);
+export const getTeam = (id) => API.get(`/team/getTeam/${id}`);

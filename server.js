@@ -25,7 +25,7 @@ app.use('/team', teamRoute);
 app.use('/comment',commentRoute);
 app.use('/application',applicationRoute);
 
-mongoose.connect(mongoURI,{useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(mongoURI,{useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false})
         .then(() => app.listen(process.env.PORT || port, () => {
         console.log('Server started, listening at localhost:5000');
         }))

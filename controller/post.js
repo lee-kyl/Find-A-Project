@@ -5,6 +5,7 @@ const TeamUp = require('../model/teamup.js');
 const User = require('../model/user.js');
 const mongoose = require('mongoose');
 const Comment = require('../model/comment.js');
+const Team = require('../model/team.js');
 
 const getPosts = async (req, res) => {
     try {
@@ -16,7 +17,7 @@ const getPosts = async (req, res) => {
             fullPost = await posts[i].populate("author").execPopulate();
             fullPosts.push(fullPost);
         }
-        
+        fullPosts.reverse();
         res.status(200).json(fullPosts);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -73,7 +74,9 @@ const createPost = async (req, res) => {
                 newTeamUp.save(async (err) => {
                     if (err) return handleError(err);
                     const { title,content,type } = req.body;
-                    const newPost = new Post({ author: user._id, title, content, type, addition: newTeamUp._id});
+                    const newPost = new Post({ _id:new mongoose.Types.ObjectId(), author: user._id, title, content, type, addition: newTeamUp._id});
+                    const newTeam = new Team({teamName:team, members:[user._id], teamuppost: newPost._id });
+                    await newTeam.save();
                     await newPost.save();
                     res.status(201).json(newPost); 
                 });               

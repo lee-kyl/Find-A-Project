@@ -174,7 +174,6 @@ export default function EditPostCard() {
   return (
     <Card className={classes.root}>
       <CardHeader
-        avatar={<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />}
         title={post?.title || "Please enter your post title here"}
         style={{ ...colorMap[post?.type], color: "white", font: "bold" }}
         action={<LongMenu post={post} updatePostType={setPost}></LongMenu>}
@@ -227,14 +226,15 @@ export default function EditPostCard() {
       </CardContent>
       <CardActions>
         <Grid container justify="space-between">
-          <Grid item xs={3}>
+          <Grid item xs={12}>
             <Button
-              size="small"
+              fullWidth
+              variant="contained"
               color="primary"
               type="button"
               onClick={sendPost}
             >
-              Post
+              Post it
             </Button>
           </Grid>
         </Grid>
